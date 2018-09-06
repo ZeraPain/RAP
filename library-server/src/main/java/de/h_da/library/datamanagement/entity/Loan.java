@@ -13,6 +13,10 @@ import java.io.Serializable;
 import java.sql.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 import de.h_da.library.datamanagement.type.LoanStatus;
 
 /**
@@ -22,6 +26,10 @@ import de.h_da.library.datamanagement.type.LoanStatus;
 @Entity
 public class Loan implements Serializable {
     
+	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long loanId;
+	
 	private Date loanDate;
 	
 	private Date dueDate;
