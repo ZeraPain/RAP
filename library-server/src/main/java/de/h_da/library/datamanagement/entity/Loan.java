@@ -1,22 +1,16 @@
-/*
- * Entity1.java
- *
- * Created on 10. September 2007, 14:54
- *
- * To change this template, choose Tools | Template Manager
- * and open the template in the editor.
- */
 
 package de.h_da.library.datamanagement.entity;
 
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 
 import de.h_da.library.datamanagement.type.LoanStatus;
 
@@ -35,6 +29,7 @@ public class Loan implements Serializable {
 	
 	private Date dueDate;
 
+	@ManyToOne(cascade={CascadeType.MERGE}, fetch=FetchType.EAGER)
 	private Customer customer;
 	
 	private BookOnStock bookOnStock;
