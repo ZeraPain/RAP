@@ -10,12 +10,13 @@
 package de.h_da.library.datamanagement.entity;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import de.h_da.library.datamanagement.type.LoanStatus;
 
@@ -33,7 +34,7 @@ public class Loan implements Serializable {
 	private Date loanDate;
 	
 	private Date dueDate;
-	
+
 	private Customer customer;
 	
 	private BookOnStock bookOnStock;
@@ -45,6 +46,14 @@ public class Loan implements Serializable {
     public Loan() {
     }
 
+    public Long getLoanId() {
+		return loanId;
+	}
+
+	public void setLoanId(Long loanId) {
+		this.loanId = loanId;
+	}
+	
     public Date getLoanDate() {
 		return loanDate;
 	}
