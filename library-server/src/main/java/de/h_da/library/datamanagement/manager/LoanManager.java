@@ -9,7 +9,10 @@
 
 package de.h_da.library.datamanagement.manager;
 
+import java.util.List;
+
 import javax.ejb.Local;
+
 import de.h_da.library.datamanagement.entity.Loan;
 
 /**
@@ -19,5 +22,14 @@ import de.h_da.library.datamanagement.entity.Loan;
 @Local
 public interface LoanManager {
 
+    void edit(Loan loan);
+
+    void destroy(Loan loan);
+
+    Loan findById(Long loanId);
+
+    List<Loan> findAll();
+
+    Loan create(Loan loan);
     
 }
