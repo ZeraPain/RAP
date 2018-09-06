@@ -3,6 +3,7 @@ package de.h_da.library.datamanagement.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,6 +16,8 @@ import de.h_da.library.datamanagement.type.ReminderStatus;
  * Created on 18. September 2007, 11:17
  *
  */
+
+@Entity
 public class Reminder  implements Serializable {
 	
 	private static final long serialVersionUID = -1241882368403321019L;
@@ -26,7 +29,7 @@ public class Reminder  implements Serializable {
 	
 	private Date dueDate, issueDate ; 
 	private Long fee; 
-	private Long invoiceId ;
+	private String invoiceId ;
 	private Loan loan; 
 	private ReminderStatus status ;
 	
@@ -63,11 +66,11 @@ public class Reminder  implements Serializable {
 		this.fee = fee;
 	}
 
-	public Long getInvoiceId() {
+	public String getInvoiceId() {
 		return invoiceId;
 	}
 
-	public void setInvoiceId(Long invoiceId) {
+	public void setInvoiceId(String invoiceId) {
 		this.invoiceId = invoiceId;
 	}
 
