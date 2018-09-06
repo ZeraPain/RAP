@@ -3,6 +3,10 @@ package de.h_da.library.datamanagement.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 import de.h_da.library.datamanagement.type.ReminderStatus;
 
 /*
@@ -14,6 +18,8 @@ import de.h_da.library.datamanagement.type.ReminderStatus;
 public class Reminder  implements Serializable {
 	
 
+	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
 	private static final long serialVersionUID = -1241882368403321019L;
 	
 	private Date dueDate, issueDate ; 
