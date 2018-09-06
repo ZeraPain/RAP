@@ -1,5 +1,7 @@
-package de.h_da.library.datamangement.type;
+package de.h_da.library.datamanagement.type;
 
 public enum LoanStatus {
 	BORROWED, DELAYED, RETURNED
 }
+
+
