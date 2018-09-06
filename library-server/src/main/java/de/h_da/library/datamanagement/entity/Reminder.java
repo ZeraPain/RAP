@@ -17,10 +17,12 @@ import de.h_da.library.datamanagement.type.ReminderStatus;
  */
 public class Reminder  implements Serializable {
 	
-
+	private static final long serialVersionUID = -1241882368403321019L;
+	
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-	private static final long serialVersionUID = -1241882368403321019L;
+	private Long id; 
+	
 	
 	private Date dueDate, issueDate ; 
 	private Long fee; 
@@ -29,6 +31,13 @@ public class Reminder  implements Serializable {
 	private ReminderStatus status ;
 	
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public Date getDueDate() {
 		return dueDate;
