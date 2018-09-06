@@ -12,5 +12,8 @@ public class BookOnStock implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 	private Book book;
+	
+	public BookOnStock() {}
 }

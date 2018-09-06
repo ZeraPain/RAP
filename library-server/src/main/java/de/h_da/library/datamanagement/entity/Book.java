@@ -20,9 +20,11 @@ public class Book implements Serializable{
 	
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String authors;
     private String title;
     
+    public Book() {}
     
     
     /**
