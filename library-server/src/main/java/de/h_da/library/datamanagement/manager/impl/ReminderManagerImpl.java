@@ -48,7 +48,7 @@ public class ReminderManagerImpl implements ReminderManager {
         return (Reminder) em.find(Reminder.class, id);
     }
 
-    public List findAll() {
+    public List<Reminder> findAll() {
         return em.createQuery("select object(o) from Reminder as o").getResultList();
     }
     

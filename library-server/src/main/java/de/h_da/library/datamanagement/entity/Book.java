@@ -58,6 +58,10 @@ public class Book implements Serializable{
 	public void setTitle(String title) {
 		this.title = title;
 	}
-    
+
+
+	public Long getId() {
+		return id;
+	}
     
 }

@@ -1,5 +1,6 @@
 package de.h_da.library.datamanagement.manager.impl;
 
+<<<<<<< HEAD
 import de.h_da.library.datamanagement.entity.Loan;
 import de.h_da.library.datamanagement.manager.LoanManager;
 
@@ -42,4 +43,8 @@ public class LoanManagerImpl implements LoanManager {
         return em.createQuery("select object(o) from Loan as o").getResultList();
     }
     
+=======
+public class LoanManagerImpl {
+
+>>>>>>> 3d05384aec7e4832f6efe3d589a405ff63a908f0
 }
