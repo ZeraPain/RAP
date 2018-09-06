@@ -16,4 +16,16 @@ public class BookOnStock implements Serializable{
 	private Book book;
 	
 	public BookOnStock() {}
+
+	public Long getId() {
+		return id;
+	}
+
+	public Book getBook() {
+		return book;
+	}
+
+	public void setBook(Book book) {
+		this.book = book;
+	}
 }

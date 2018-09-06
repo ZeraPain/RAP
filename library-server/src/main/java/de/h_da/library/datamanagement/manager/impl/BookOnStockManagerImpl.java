@@ -4,8 +4,6 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
-import de.h_da.library.datamanagement.entity.Book;
 import de.h_da.library.datamanagement.entity.BookOnStock;
 import de.h_da.library.datamanagement.manager.BookOnStockManager;
 
