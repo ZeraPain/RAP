@@ -78,7 +78,7 @@ public class LoanManagerImplTest extends LibraryTest {
         
         // evaluation
         loanFound = loanManager.findById(loanCreated.getLoanId());
-        assertEquals(now2, loanFound.getDueDate());
+        assertEquals(now2, loanFound.getLoanDate());
         assertEquals(LoanStatus.DELAYED, loanFound.getStatus());
     }
 
@@ -145,6 +145,6 @@ public class LoanManagerImplTest extends LibraryTest {
         loansFoundAfter = loanManager.findAll();
         
         // evaluation
-        assertEquals(2, loansFoundBefore.size() - loansFoundAfter.size());
+        assertEquals(2, loansFoundAfter.size() - loansFoundBefore.size());
     }
 }
