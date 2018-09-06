@@ -43,4 +43,52 @@ public class Loan implements Serializable {
     public Loan() {
     }
 
+    public Date getLoanDate() {
+		return loanDate;
+	}
+
+
+	public void setLoanDate(Date loanDate) {
+		this.loanDate = loanDate;
+	}
+
+
+	public Date getDueDate() {
+		return dueDate;
+	}
+
+
+	public void setDueDate(Date dueDate) {
+		this.dueDate = dueDate;
+	}
+
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+
+	public BookOnStock getBookOnStock() {
+		return bookOnStock;
+	}
+
+
+	public void setBookOnStock(BookOnStock bookOnStock) {
+		this.bookOnStock = bookOnStock;
+	}
+
+
+	public LoanStatus getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(LoanStatus status) {
+		this.status = status;
+	}
 }
