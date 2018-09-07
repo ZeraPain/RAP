@@ -1,7 +1,5 @@
 package de.h_da.library.borrowing.usecase;
 
-import java.util.Collection;
-
 import javax.ejb.Remote;
 
 import de.h_da.library.LibraryException;

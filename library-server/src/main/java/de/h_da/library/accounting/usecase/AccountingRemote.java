@@ -1,14 +1,14 @@
 package de.h_da.library.accounting.usecase;
 
-import javax.ejb.Local;
+import javax.ejb.Remote;
 
 /**
  * [usecase] This use case comprises the functionality of the accounting
  * component.
  * 
  */
-@Local
-public interface Accounting {
+@Remote
+public interface AccountingRemote {
 
 	/**
 	 * Generates a new <code>Invoice</code> object.

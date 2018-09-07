@@ -21,8 +21,10 @@ import de.h_da.library.datamanagement.type.LoanStatus;
 public class BorrowingImpl implements Borrowing, BorrowingRemote{
 	@EJB()
 	BookOnStockManager bookOnStockManager;
+	
 	@EJB()
 	CustomerManager customerManager;
+	
 	@EJB()
 	LoanManager loanManager;
 	
