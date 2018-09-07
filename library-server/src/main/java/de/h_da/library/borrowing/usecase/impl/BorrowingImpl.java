@@ -1,13 +1,13 @@
 package de.h_da.library.borrowing.usecase.impl;
 
-import de.h_da.library.borrowing.usecase.Borrowing;
-
 import java.util.Collection;
 import java.util.Date;
 import java.util.Calendar;
 
 import javax.ejb.EJB;
 
+import de.h_da.library.borrowing.usecase.Borrowing;
+import de.h_da.library.borrowing.usecase.BorrowingRemote;
 import de.h_da.library.LibraryException;
 import de.h_da.library.datamanagement.entity.BookOnStock;
 import de.h_da.library.datamanagement.entity.Loan;
@@ -18,7 +18,7 @@ import de.h_da.library.datamanagement.manager.LoanManager;
 
 import de.h_da.library.datamanagement.type.LoanStatus;
 
-public class BorrowingImpl implements Borrowing{
+public class BorrowingImpl implements Borrowing, BorrowingRemote{
 	@EJB()
 	BookOnStockManager bookOnStockManager;
 	@EJB()

@@ -25,7 +25,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
-@Stateless
+//@Stateless
 public class BookManagementImpl implements BookManagement {
     
     @EJB()
