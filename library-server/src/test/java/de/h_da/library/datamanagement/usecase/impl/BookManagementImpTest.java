@@ -11,6 +11,7 @@ package de.h_da.library.datamanagement.usecase.impl;
 import de.h_da.library.configuration.LibraryTest;
 import de.h_da.library.datamanagement.entity.Book;
 import de.h_da.library.datamanagement.entity.BookOnStock;
+import de.h_da.library.datamanagement.manager.BookManager;
 import de.h_da.library.datamanagement.manager.BookOnStockManager;
 import de.h_da.library.datamanagement.usecase.BookManagement;
 
@@ -31,6 +32,9 @@ public class BookManagementImpTest extends LibraryTest {
     @EJB
     BookManagement bookManagement;
 
+    @EJB
+    BookManager bookManager;
+    
     /**
      * Test of useCaseMethod1 method, of class de.h_da.library.component1.usecase.impl.UseCase1Impl.
      */
@@ -43,13 +47,37 @@ public class BookManagementImpTest extends LibraryTest {
         List<BookOnStock> booksOnStockFoundBefore, booksOnStockFoundAfter;
         booksOnStockFoundBefore = bookOnStockManager.findAll();
         
-        bookManagement.addBook(book, 10);
+        int bookId = bookManagement.addBook(book, 10);
         
         booksOnStockFoundAfter = bookOnStockManager.findAll();
         
         // evaluation
         assertEquals(10, booksOnStockFoundAfter.size() - booksOnStockFoundBefore.size());
-  
+        assertNotNull(bookId);
+    }
+    
+    @Test
+    public void testModifyBook() {
+    	Book book = new Book();
+        book.setTitle("Hallo");
+        book.setAuthors("Welt");
+        
+        bookManagement.addBook(book, 1);
+        
+        book.setTitle("Adee");
+        bookManagement.modifyBook(book);
+        
+        List<Book> books = bookManager.findAll();
+		if(book != null) 
+		{
+			for (Book b : books)
+			{
+				if (b.getId() == book.getId())
+				{
+					assertEquals("Adee", b.getTitle());
+				}
+			}							
+		}
     }
 
 
