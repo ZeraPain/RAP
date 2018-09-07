@@ -2,6 +2,8 @@ package de.h_da.library.datamanagement.usecase.impl;
 
 import java.util.Collection;
 import javax.ejb.EJB;
+import javax.ejb.Stateless;
+
 import de.h_da.library.datamanagement.entity.Book;
 import de.h_da.library.datamanagement.entity.Customer;
 import de.h_da.library.datamanagement.manager.BookManager;
@@ -9,9 +11,11 @@ import de.h_da.library.datamanagement.manager.CustomerManager;
 import de.h_da.library.datamanagement.usecase.Search;
 import de.h_da.library.datamanagement.usecase.SearchRemote;
 
+@Stateless
 public class SearchImpl implements Search, SearchRemote {
 	@EJB()
     BookManager bookManager;
+	@EJB()
 	CustomerManager customerManager;
     
     /** Creates a new instance of UseCase1Bean */
