@@ -65,12 +65,12 @@ public class BookManagementImpl implements BookManagement, BookManagementRemote 
     @Override
 	public void addBooksOnStock(int bookId, int numberOfBooksOnStock)
 	{
-		BookOnStock bookOnStock = new BookOnStock();
-		Book book = bookManager.findById((long)bookId);
-		bookOnStock.setBook(book);
-		
+    	Book book = bookManager.findById((long)bookId);
+    	
 		for (int i = 0; i < numberOfBooksOnStock; ++i)
 		{
+			BookOnStock bookOnStock = new BookOnStock();	
+			bookOnStock.setBook(book);
 			bookOnStockManager.create(bookOnStock);
 		}
 	}
