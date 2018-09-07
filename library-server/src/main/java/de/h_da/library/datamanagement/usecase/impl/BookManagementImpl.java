@@ -9,35 +9,31 @@
 
 package de.h_da.library.datamanagement.usecase.impl;
 
-import de.h_da.library.LibraryRuntimeException;
-import de.h_da.library.component1.entity.Entity1;
-import de.h_da.library.component1.manager.Entity1Manager;
-import de.h_da.library.component1.usecase.UseCase1;
-import de.h_da.library.component1.usecase.UseCase1Remote;
 import de.h_da.library.datamanagement.entity.Book;
 import de.h_da.library.datamanagement.entity.BookOnStock;
 import de.h_da.library.datamanagement.manager.BookManager;
 import de.h_da.library.datamanagement.manager.BookOnStockManager;
 import de.h_da.library.datamanagement.usecase.BookManagement;
+import de.h_da.library.datamanagement.usecase.BookManagementRemote;
 
-import java.util.Collection;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
-//@Stateless
-public class BookManagementImpl implements BookManagement {
+@Stateless
+public class BookManagementImpl implements BookManagement, BookManagementRemote {
     
-    @EJB()
+    @EJB
     BookManager bookManager;
     
-    @EJB()
+    @EJB
     BookOnStockManager bookOnStockManager;
     
     /** Creates a new instance of UseCase1Bean */
     public BookManagementImpl() {
     }
     
+    @Override
 	public int addBook(Book book, int numberOfBooksOnStock)
 	{
 		Book newBook = bookManager.create(book);
@@ -47,6 +43,7 @@ public class BookManagementImpl implements BookManagement {
 		return (int)bookId;
 	}
 
+    @Override
 	public void modifyBook(Book book)
 	{
 		List<Book> books = bookManager.findAll();
@@ -65,6 +62,7 @@ public class BookManagementImpl implements BookManagement {
 		
 	}
 	
+    @Override
 	public void addBooksOnStock(int bookId, int numberOfBooksOnStock)
 	{
 		BookOnStock bookOnStock = new BookOnStock();
