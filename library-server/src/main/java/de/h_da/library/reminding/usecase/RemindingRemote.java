@@ -1,6 +1,6 @@
 package de.h_da.library.reminding.usecase;
 
-import javax.ejb.@Remote;
+import javax.ejb.Remote;
 
 
 /**
