@@ -13,9 +13,9 @@ import de.h_da.library.datamanagement.usecase.SearchRemote;
 
 @Stateless
 public class SearchImpl implements Search, SearchRemote {
-	@EJB()
+	@EJB
     BookManager bookManager;
-	@EJB()
+	@EJB
 	CustomerManager customerManager;
     
     /** Creates a new instance of UseCase1Bean */
