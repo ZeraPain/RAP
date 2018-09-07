@@ -17,7 +17,7 @@ public class Invoice implements Serializable{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String address;
-    private Long amount;
+    private int amount;
     private Date date;
     private String name;
     private InvoiceStatus status;
@@ -33,10 +33,10 @@ public class Invoice implements Serializable{
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public Long getAmount() {
+	public int getAmount() {
 		return amount;
 	}
-	public void setAmount(Long amount) {
+	public void setAmount(int amount) {
 		this.amount = amount;
 	}
 	public Date getDate() {

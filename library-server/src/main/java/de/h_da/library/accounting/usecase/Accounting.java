@@ -34,7 +34,7 @@ public interface Accounting {
 	 *       ]
 	 * </pre>
 	 */
-	public int sendInvoice(String invoiceSubject, String invoiceName, String invoiceAddress,
+	public Long sendInvoice(String invoiceSubject, String invoiceName, String invoiceAddress,
 			int invoiceAmount);
 
 	/**

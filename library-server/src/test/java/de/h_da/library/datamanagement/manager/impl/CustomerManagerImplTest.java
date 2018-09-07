@@ -15,7 +15,6 @@ import de.h_da.library.datamanagement.manager.CustomerManager;
 @RunWith(Arquillian.class)
 public class CustomerManagerImplTest extends LibraryTest{
 
-
 	@EJB
 	private CustomerManager customerManager;
 	

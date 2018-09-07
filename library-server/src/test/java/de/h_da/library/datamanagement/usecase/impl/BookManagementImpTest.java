@@ -59,7 +59,6 @@ public class BookManagementImpTest extends LibraryTest {
         
         // evaluation
         assertEquals(2, booksOnStockFoundAfter.size() - booksOnStockFoundBefore.size());
-
     }
 
     /**

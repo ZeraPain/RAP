@@ -25,13 +25,13 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
-//@Stateless
+@Stateless
 public class BookManagementImpl implements BookManagement {
     
-    @EJB()
+    @EJB
     BookManager bookManager;
     
-    @EJB()
+    @EJB
     BookOnStockManager bookOnStockManager;
     
     /** Creates a new instance of UseCase1Bean */

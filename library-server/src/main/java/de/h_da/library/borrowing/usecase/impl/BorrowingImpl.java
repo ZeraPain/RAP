@@ -1,6 +1,5 @@
 package de.h_da.library.borrowing.usecase.impl;
 
-import java.util.Collection;
 import java.util.Date;
 import java.util.Calendar;
 
@@ -19,13 +18,13 @@ import de.h_da.library.datamanagement.manager.LoanManager;
 import de.h_da.library.datamanagement.type.LoanStatus;
 
 public class BorrowingImpl implements Borrowing, BorrowingRemote{
-	@EJB()
+	@EJB
 	BookOnStockManager bookOnStockManager;
 	
-	@EJB()
+	@EJB
 	CustomerManager customerManager;
 	
-	@EJB()
+	@EJB
 	LoanManager loanManager;
 	
 	public BorrowingImpl() {
