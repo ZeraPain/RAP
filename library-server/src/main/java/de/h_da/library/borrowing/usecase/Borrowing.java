@@ -36,7 +36,7 @@ public interface Borrowing {
 	 * </pre>
 	 * @throws LibraryException 
 	 */
-	public int borrowBook(Long bookOnStockId, Long customerId) throws LibraryException;
+	public Long borrowBook(Long bookOnStockId, Long customerId) throws LibraryException;
 
 	/**
 	 * [command] Marks a <code>Loan</code> as being returned.
