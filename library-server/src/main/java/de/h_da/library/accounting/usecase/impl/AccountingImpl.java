@@ -1,5 +1,6 @@
 package de.h_da.library.accounting.usecase.impl;
 
+
 import java.util.Collection;
 import java.util.Calendar;
 import java.util.Date;
@@ -59,3 +60,4 @@ public class AccountingImpl implements Accounting, AccountingRemote {
 
 	
 }
+

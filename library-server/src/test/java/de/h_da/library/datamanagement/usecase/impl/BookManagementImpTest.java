@@ -53,8 +53,7 @@ public class BookManagementImpTest extends LibraryTest {
         
         // evaluation
         assertEquals(10, booksOnStockFoundAfter.size() - booksOnStockFoundBefore.size());
-        assertNotNull(bookId);
-    }
+        assertNotNull(bookId);    }
     
     @Test
     public void testModifyBook() {
