@@ -11,6 +11,7 @@ import org.jboss.arquillian.junit.Arquillian;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import de.h_da.library.RegistrationException;
 import de.h_da.library.accounting.entity.Invoice;
 import de.h_da.library.accounting.manager.InvoiceManager;
 import de.h_da.library.configuration.LibraryTest;
@@ -31,7 +32,7 @@ public class RegistrationImplTest extends LibraryTest {
 	InvoiceManager invoiceManager;
 	
 	@Test
-	public void registerCustomer() {
+	public void registerCustomer() throws RegistrationException {
 		
         Customer customer, customerCreated;
 
@@ -53,14 +54,14 @@ public class RegistrationImplTest extends LibraryTest {
 	}
 	
 	@Test
-	public void registerCustomerAndInvoice() {
+	public void registerCustomerAndInvoice() throws RegistrationException {
 		
         Customer customer, customerCreated;
 
         // preparation
         customer = new Customer();
         customer.setName("InvoiceCustomer");
-        customer.setAddress("Title");
+        customer.setAddress("InvoiceCustomerAddress");
         
         Long id = registration.register(customer);
         // execution
@@ -76,11 +77,101 @@ public class RegistrationImplTest extends LibraryTest {
         assertNotNull(customerCreated);
         assertNotNull(customerCreated.getId());
         assertEquals("InvoiceCustomer", filteredInvoice.getName());
-        assertEquals("Title", filteredInvoice.getAddress());
+        assertEquals("InvoiceCustomerAddress", filteredInvoice.getAddress());
         assertEquals(5, filteredInvoice.getAmount());
-        
-        
+	}
 	
+	@Test
+	public void modifyCustomer() throws RegistrationException {
+		
+        Customer customer, customerCreated;
+
+        // preparation
+        customer = new Customer();
+        customer.setName("ModCustomer");
+        customer.setAddress("ModCustomerAddress");
+        
+        Long id = registration.register(customer);
+
+        //execution
+        customerCreated = customerManager.findById(id);
+        customerCreated.setAddress("NewAddress");
+        registration.modifyRestistration(customerCreated);
+        
+        // evaluation
+        assertNotNull(customerCreated);
+        assertNotNull(customerCreated.getId());
+        assertEquals("ModCustomer", customerCreated.getName());
+        assertEquals("NewAddress", customerCreated.getAddress());
+	}
+	
+	@Test(expected=RegistrationException.class)
+	public void customerIdExists() throws RegistrationException {
+        Customer customer, customerCreated;
+
+        // preparation
+        customer = new Customer();
+        customer.setName("Mod1Customer");
+        customer.setAddress("Mod1CustomerAddress");
+        
+        Long id = registration.register(customer);
+
+        //execution
+        customerCreated = customerManager.findById(id);
+        customerCreated.setAddress("NewAddress");
+        customerCreated.setName("NewCustomer");
+        Long id2 = registration.register(customer);
+	}
+	
+	@Test(expected=RegistrationException.class)
+	public void customerNameExists() throws RegistrationException {
+        Customer customer, customerCreated;
+
+        // preparation
+        customer = new Customer();
+        customer.setName("Mod2Customer");
+        customer.setAddress("Mod2CustomerAddress");
+        
+        Long id = registration.register(customer);
+
+        //execution
+        customerCreated = new Customer();
+        customerCreated.setName("Mod2Customer");
+        id = registration.register(customerCreated);
+        
+	}
+	
+	@Test(expected=RegistrationException.class)
+	public void customerAddressExists() throws RegistrationException {
+        Customer customer, customerCreated;
+
+        // preparation
+        customer = new Customer();
+        customer.setName("Mod3Customer");
+        customer.setAddress("Mod3CustomerAddress");
+        
+        Long id = registration.register(customer);
+
+        //execution
+        customerCreated = new Customer();
+        customerCreated.setAddress("Mod3CustomerAddress");
+        id = registration.register(customerCreated);
+	}
+	
+	@Test(expected=RegistrationException.class)
+	public void modifyExeption() throws RegistrationException {
+        Customer customer, customerCreated;
+
+        // preparation
+        customer = new Customer();
+        customer.setName("Mod4Customer");
+        customer.setAddress("Mod4CustomerAddress");
+        
+        Long id = registration.register(customer);
+
+        //execution
+        customerCreated = customerManager.findById(id);
+        id = registration.register(customerCreated);
 	}
 	
 

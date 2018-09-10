@@ -1,6 +1,8 @@
 package de.h_da.library.registration.usecase;
 
 import javax.ejb.Local;
+
+import de.h_da.library.RegistrationException;
 import de.h_da.library.datamanagement.entity.Customer;
 
 /**
@@ -32,8 +34,9 @@ public interface Registration {
 	 *              &amp;&amp; i.amount = 500 &amp;&amp; // EUR 5.00 registration fee
 	 *        ]
 	 * </pre>
+	 * @throws RegistrationException 
 	 */
-	public Long register(Customer customer);
+	public Long register(Customer customer) throws RegistrationException;
 
 	/**
 	 * Modifies the data of an already registered customer
@@ -49,7 +52,7 @@ public interface Registration {
 	 * </pre>
 	 * 
 	 */
-	public void modifyRestistration(Customer customer);
+	public void modifyRestistration(Customer customer) throws RegistrationException;
 
 
 }

@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-
+import de.h_da.library.RegistrationException;
 import de.h_da.library.accounting.entity.Invoice;
 import de.h_da.library.accounting.manager.InvoiceManager;
 import de.h_da.library.datamanagement.entity.Customer;
@@ -28,14 +28,14 @@ public class RegistrationImpl implements Registration, RegistrationRemote{
 	}
 	
 	@Override
-	public Long register(Customer customer) {
+	public Long register(Customer customer) throws RegistrationException {
 		
 		List<Customer> customerCollection =  customerManager.findAll();
 		Customer foundCustomer = customerCollection.stream().filter(c -> c.getId().equals(customer.getId())).findFirst().orElse(new Customer());
 		if(foundCustomer.getId() == null) {
 			customerExists(customer, customerCollection);
 		}else {
-			//throw
+			throw new RegistrationException("Customer ID already exists");
 		}
 		
 		Invoice newInvoice = new Invoice();
@@ -57,23 +57,23 @@ public class RegistrationImpl implements Registration, RegistrationRemote{
 		return newCustomer.getId();
 	}
 	
-	private void customerExists(Customer customer, List<Customer> customerCollection) {
+	private void customerExists(Customer customer, List<Customer> customerCollection) throws RegistrationException {
 		for (Customer c : customerCollection) {
 
 			if(c.getAddress().equals(customer.getAddress())) {
-				// throw
+				throw new RegistrationException("Customer Address already exists");
 			}
 			if(c.getName().equals(customer.getName())) {
-				// throw
+				throw new RegistrationException("Customer Name already exists");
 			}
 		}
 	}
 
 	@Override
-	public void modifyRestistration(Customer customer) {
+	public void modifyRestistration(Customer customer) throws RegistrationException {
 		Customer storedCustomer = customerManager.findById(customer.getId());
 		if(storedCustomer.getId() != customer.getId()) {
-			//throw
+			throw new RegistrationException("Customer ID" + customer.getId().toString() + " does not exist");
 		}
 		customerManager.edit(storedCustomer);
 	}
