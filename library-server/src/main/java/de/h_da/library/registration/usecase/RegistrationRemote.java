@@ -28,7 +28,7 @@ public interface RegistrationRemote {
 	 *        ]
 	 * </pre>
 	 */
-	public int register(Customer customer);
+	public Long register(Customer customer);
 
 	/**
 	 * Modifies the data of an already registered customer
