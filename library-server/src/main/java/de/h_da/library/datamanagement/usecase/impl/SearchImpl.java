@@ -28,9 +28,14 @@ public class SearchImpl implements Search, SearchRemote {
 		if(book != null) {
 			//remove all books that are not matching the title or the author
 			if(!book.getTitle().isEmpty())
-				books.removeIf(b->!b.getTitle().isEmpty() && b.getTitle().toUpperCase() != book.getTitle().toUpperCase());
+			{
+				books.removeIf(b->(b.getTitle().isEmpty() || !b.getTitle().toLowerCase().equals(book.getTitle().toLowerCase())));
+			}
+			
 			if(!book.getAuthors().isEmpty())
-				books.removeIf(b->!b.getAuthors().isEmpty() && b.getAuthors().toUpperCase() != book.getAuthors().toUpperCase());							
+			{
+				books.removeIf(b->(b.getAuthors().isEmpty() || !b.getAuthors().toLowerCase().equals(book.getAuthors().toLowerCase())));
+			}
 		}
 		return books;
 	}
