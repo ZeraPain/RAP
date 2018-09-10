@@ -62,7 +62,7 @@ public class RemindingImpl implements Reminding, RemindingRemote {
      			 Invoice newInvoice = new Invoice();
      			 newInvoice.setDate(now);
      			 newInvoice.setSubject("Library Reminder");
-     			 newInvoice.setAmount(300L);
+     			 newInvoice.setAmount(300);
      			 newInvoice.setAddress(customer.getAddress());
      			 newInvoice.setName(customer.getName());
      			
