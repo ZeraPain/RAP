@@ -15,6 +15,7 @@ import org.junit.Test;
 import de.h_da.library.LibraryException;
 import de.h_da.library.borrowing.usecase.Borrowing;
 import de.h_da.library.configuration.LibraryTest;
+import de.h_da.library.datamanagement.entity.Book;
 import de.h_da.library.datamanagement.entity.BookOnStock;
 import de.h_da.library.datamanagement.entity.Customer;
 import de.h_da.library.datamanagement.entity.Loan;
@@ -23,12 +24,16 @@ import de.h_da.library.datamanagement.manager.BookOnStockManager;
 import de.h_da.library.datamanagement.manager.CustomerManager;
 import de.h_da.library.datamanagement.manager.LoanManager;
 import de.h_da.library.datamanagement.type.LoanStatus;
+import de.h_da.library.datamanagement.usecase.BookManagement;
 
 @RunWith(Arquillian.class)
 public class BorrowingImplTest extends LibraryTest {
 
 	@EJB
 	BookOnStockManager bookOnStockManager;
+	
+	@EJB
+	BookManagement bookManagement;
 	
 	@EJB
 	CustomerManager customerManager;
@@ -39,8 +44,25 @@ public class BorrowingImplTest extends LibraryTest {
 	@EJB
     Borrowing borrowing;
 	
+	/** Creates a new instance of UseCase1Bean */
+    public BorrowingImplTest() {
+    }
+    
+    private void setup() {
+    	Book book = new Book();
+        book.setTitle("Hallo");
+        book.setAuthors("Welt");
+        
+        bookManagement.addBook(book, 10);
+        Customer testCustomer = new Customer();
+        testCustomer.setName("Tester");
+        customerManager.create(testCustomer);
+    }
+    
 	@Test
 	public void testBorrowBook() {	
+		setup();
+        
 		List<BookOnStock> booksOnStock = bookOnStockManager.findAll();
 		BookOnStock bookOnStockToBorrow = booksOnStock.get(0);
 		
@@ -64,6 +86,8 @@ public class BorrowingImplTest extends LibraryTest {
 	
 	@Test
 	public void testReturnBook() {	
+		setup();
+        
 		List<BookOnStock> booksOnStock = bookOnStockManager.findAll();
 		BookOnStock bookOnStockToBorrow = booksOnStock.get(0);
 		

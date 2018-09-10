@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.Calendar;
 
 import javax.ejb.EJB;
+import javax.ejb.Stateless;
 
 import de.h_da.library.borrowing.usecase.Borrowing;
 import de.h_da.library.borrowing.usecase.BorrowingRemote;
@@ -17,6 +18,7 @@ import de.h_da.library.datamanagement.manager.LoanManager;
 
 import de.h_da.library.datamanagement.type.LoanStatus;
 
+@Stateless
 public class BorrowingImpl implements Borrowing, BorrowingRemote{
 	@EJB
 	BookOnStockManager bookOnStockManager;
