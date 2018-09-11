@@ -1,6 +1,7 @@
 package de.h_da.library.datamanagement.usecase;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.ejb.Local;
 
@@ -32,7 +33,7 @@ public interface Search {
 	 * </pre>
 	 * 
 	 */
-	public Collection<Book> findBooksByAttributes(Book book);
+	public List<Book> findBooksByAttributes(Book book);
 
 	/**
 	 * [basicQuery] Finds all customers in the library system according to a given template.
@@ -51,6 +52,6 @@ public interface Search {
 	 * </pre>
 	 * 
 	 */
-	public Collection<Customer> findCustomersByAttributes(Customer customer);
+	public List<Customer> findCustomersByAttributes(Customer customer);
 
 }

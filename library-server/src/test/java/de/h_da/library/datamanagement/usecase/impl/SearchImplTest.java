@@ -60,19 +60,27 @@ public class SearchImplTest extends LibraryTest{
         bookCreated1 = bookManager.create(book1);
         bookCreated2 = bookManager.create(book2);
         bookCreated3 = bookManager.create(book3);
-        bookCreated4 = bookManager.create(book4);
         
         // evaluation
         Book filter = new Book();
         filter.setAuthors("Schmitt");
         filter.setTitle("Der Hof");
-        Collection<Book> foundBooks = search.findBooksByAttributes(filter);
+        ArrayList<Book> foundBooks = (ArrayList<Book>) search.findBooksByAttributes(filter);
         
-        assertEquals(1, foundBooks.size());
+        ArrayList<Book> expactedBooks = (ArrayList<Book>) bookManager.findAll();      
         
-        Book foundBook = (Book)foundBooks.toArray()[0];
-        assertEquals(foundBook.getAuthors(), "Schmitt");
-        assertEquals(foundBook.getTitle(), "Der Hof");
-
+        boolean result = foundBooks.containsAll(expactedBooks); 
+        boolean match = false;
+        
+        for(Book found: foundBooks) {
+        	for(Book exp: expactedBooks) {
+        		if(found.getTitle().equals(exp) && found.getAuthors().equals(exp.getAuthors())) {
+        			match = true;
+        		}
+        	}
+        }
+        
+        assertTrue("##### FAILURE: " + foundBooks.size() +" #####",match);
+        
 	}
 }
