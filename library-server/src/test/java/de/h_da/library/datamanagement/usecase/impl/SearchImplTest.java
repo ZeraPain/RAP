@@ -11,6 +11,7 @@ import org.jboss.arquillian.junit.Arquillian;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import de.h_da.library.LibraryException;
 import de.h_da.library.configuration.LibraryTest;
 import de.h_da.library.datamanagement.entity.Book;
 import de.h_da.library.datamanagement.entity.Customer;
@@ -61,7 +62,13 @@ public class SearchImplTest extends LibraryTest{
         filter1.setAuthors("Schmitt");
         filter1.setTitle("Der Hof");
         
-        ArrayList<Book> foundBooks = (ArrayList<Book>) search.findBooksByAttributes(filter1);
+        ArrayList<Book> foundBooks = null;
+		try {
+			foundBooks = (ArrayList<Book>) search.findBooksByAttributes(filter1);
+		} catch (LibraryException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         
         assertNotNull(foundBooks);
         assertEquals(1,foundBooks.size());
@@ -70,7 +77,13 @@ public class SearchImplTest extends LibraryTest{
         Book filter2 = new Book();
         filter2.setTitle("Der Hof");
         
-        ArrayList<Book> foundBooks2 = (ArrayList<Book>) search.findBooksByAttributes(filter2);
+        ArrayList<Book> foundBooks2 = null;
+		try {
+			foundBooks2 = (ArrayList<Book>) search.findBooksByAttributes(filter2);
+		} catch (LibraryException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         
         assertNotNull(foundBooks2);
         assertEquals(2,foundBooks2.size());
@@ -147,7 +160,13 @@ public class SearchImplTest extends LibraryTest{
         filter1.setName("Schmitt");
         filter1.setAddress("Hinterhof 1");
         
-        ArrayList<Customer> foundCustomers = (ArrayList<Customer>) search.findCustomersByAttributes(filter1);
+        ArrayList<Customer> foundCustomers = null;
+		try {
+			foundCustomers = (ArrayList<Customer>) search.findCustomersByAttributes(filter1);
+		} catch (LibraryException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         
         assertNotNull(foundCustomers);
         assertEquals(1,foundCustomers.size());
@@ -157,7 +176,13 @@ public class SearchImplTest extends LibraryTest{
         Customer filter2 = new Customer();
         filter2.setAddress("Hinterhof 1");
         
-        ArrayList<Customer> foundCustomers2 = (ArrayList<Customer>) search.findCustomersByAttributes(filter2);
+        ArrayList<Customer> foundCustomers2 = null;
+		try {
+			foundCustomers2 = (ArrayList<Customer>) search.findCustomersByAttributes(filter2);
+		} catch (LibraryException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         
         assertNotNull(foundCustomers2);
         assertEquals(2,foundCustomers2.size());

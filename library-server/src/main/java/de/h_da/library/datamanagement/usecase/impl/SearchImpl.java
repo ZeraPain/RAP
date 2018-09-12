@@ -5,8 +5,10 @@ import java.util.stream.Collectors;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.interceptor.Interceptors;
 
-import de.h_da.library.SearchException;
+import de.h_da.library.GlobalInterceptor;
+import de.h_da.library.LibraryException;
 import de.h_da.library.datamanagement.entity.Book;
 import de.h_da.library.datamanagement.entity.Customer;
 import de.h_da.library.datamanagement.manager.BookManager;
@@ -15,6 +17,7 @@ import de.h_da.library.datamanagement.usecase.Search;
 import de.h_da.library.datamanagement.usecase.SearchRemote;
 
 @Stateless
+@Interceptors(GlobalInterceptor.class)
 public class SearchImpl implements Search, SearchRemote {
 	@EJB
     BookManager bookManager;
@@ -26,14 +29,14 @@ public class SearchImpl implements Search, SearchRemote {
     }
 
 	@Override
-	public List<Book> findBooksByAttributes(Book book){	
+	public List<Book> findBooksByAttributes(Book book) throws LibraryException{	
 		if(book == null)
-			throw new SearchException("No book as search filter set!");
+			throw new LibraryException("No book as search filter set!");
 		
 		List<Book> books = bookManager.findAll();
 		
 		if(books.isEmpty()) 
-			throw new SearchException("There are no books stored, search aborted!");
+			throw new LibraryException("There are no books stored, search aborted!");
 						
 		List<Book> foundBooks = books;
 		if(book != null) {			
@@ -50,14 +53,14 @@ public class SearchImpl implements Search, SearchRemote {
 	}
 
 	@Override
-	public List<Customer> findCustomersByAttributes(Customer customer) {
+	public List<Customer> findCustomersByAttributes(Customer customer) throws LibraryException {
 		if(customer == null)
-			throw new SearchException("No customer as search filter set!");
+			throw new LibraryException("No customer as search filter set!");
 		
 		List<Customer> customers = customerManager.findAll();
 		
 		if(customers.isEmpty()) 
-			throw new SearchException("There are no customers stored, search aborted!");
+			throw new LibraryException("There are no customers stored, search aborted!");
 				
 		List<Customer> foundCustomers = customers;
 		if(customer != null) {			
