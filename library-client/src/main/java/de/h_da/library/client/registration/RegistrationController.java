@@ -1,9 +1,11 @@
 package de.h_da.library.client.registration;
 
+import de.h_da.library.RegistrationException;
 import de.h_da.library.client.QuasarController;
 import de.h_da.library.client.ServerFacade;
 import de.h_da.library.component1.type.DataType1;
 import de.h_da.library.component1.usecase.UseCase1Remote;
+import de.h_da.library.datamanagement.entity.Customer;
 import de.h_da.library.registration.usecase.RegistrationRemote;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -62,11 +64,26 @@ public class RegistrationController implements QuasarController{
     @FXML
     void registerEvent(MouseEvent event) {
     	System.out.println("register");
+        Customer customer = new Customer();
+        customer.setAddress(addressRegisterTextBox.getText());
+        customer.setName(nameRegisterTextBox.getText());
+        try {
+			Long id = registration.register(customer);
+			System.out.println("Customer ID " + id.toString());
+		} catch (RegistrationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+        
+    	
     }
+    
+    RegistrationRemote registration;
 
 	@Override
 	public void init() {
-        RegistrationRemote registration = ServerFacade.getInstance().lookup("RegistrationImpl", RegistrationRemote.class);
+        registration = ServerFacade.getInstance().lookup("RegistrationImpl", RegistrationRemote.class);
         //entity1List.addAll(reigstration.useCaseMethod1());
         //entity1ListView.setItems(entity1List);
 
