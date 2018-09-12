@@ -7,9 +7,8 @@ import javax.ejb.*;
  * administer the Reminder base.
  * 
  */
-@Local
-public interface ReminderManagment {
-
+@Remote
+public interface ReminderManagementRemote {
 
 
 	public void sendReminders();
@@ -17,7 +16,5 @@ public interface ReminderManagment {
 
 	public void closeReminder(long invoiceId);
 
-	
-	
 
 }

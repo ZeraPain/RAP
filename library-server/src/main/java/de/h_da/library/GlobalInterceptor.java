@@ -1,9 +1,9 @@
-package de.h_da.library.borrowing.usecase.interceptor;
+package de.h_da.library;
 
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
 
-public class BorrowingInterceptor {
+public class GlobalInterceptor {
 	
 	@AroundInvoke
 	public Object intercept(InvocationContext ctx) throws Exception

@@ -9,6 +9,7 @@
 
 package de.h_da.library.datamanagement.usecase.impl;
 
+import de.h_da.library.GlobalInterceptor;
 import de.h_da.library.LibraryRuntimeException;
 import de.h_da.library.datamanagement.entity.Book;
 import de.h_da.library.datamanagement.entity.BookOnStock;
@@ -16,7 +17,7 @@ import de.h_da.library.datamanagement.manager.BookManager;
 import de.h_da.library.datamanagement.manager.BookOnStockManager;
 import de.h_da.library.datamanagement.usecase.BookManagement;
 import de.h_da.library.datamanagement.usecase.BookManagementRemote;
-import de.h_da.library.datamanagement.usecase.interceptor.BookManagementInterceptor;
+
 
 import java.util.List;
 import javax.ejb.EJB;
@@ -24,7 +25,7 @@ import javax.ejb.Stateless;
 import javax.interceptor.Interceptors;
 
 @Stateless
-@Interceptors(BookManagementInterceptor.class)
+@Interceptors(GlobalInterceptor.class)
 public class BookManagementImpl implements BookManagement, BookManagementRemote {
     
     @EJB

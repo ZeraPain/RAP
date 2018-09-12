@@ -9,8 +9,8 @@ import javax.interceptor.Interceptors;
 
 import de.h_da.library.borrowing.usecase.Borrowing;
 import de.h_da.library.borrowing.usecase.BorrowingRemote;
-import de.h_da.library.borrowing.usecase.interceptor.BorrowingInterceptor;
 import de.h_da.library.BorrowingException;
+import de.h_da.library.GlobalInterceptor;
 import de.h_da.library.LibraryException;
 import de.h_da.library.LibraryRuntimeException;
 import de.h_da.library.datamanagement.entity.BookOnStock;
@@ -23,7 +23,7 @@ import de.h_da.library.datamanagement.manager.LoanManager;
 import de.h_da.library.datamanagement.type.LoanStatus;
 
 @Stateless
-@Interceptors(BorrowingInterceptor.class)
+@Interceptors(GlobalInterceptor.class)
 public class BorrowingImpl implements Borrowing, BorrowingRemote{
 	@EJB
 	BookOnStockManager bookOnStockManager;
