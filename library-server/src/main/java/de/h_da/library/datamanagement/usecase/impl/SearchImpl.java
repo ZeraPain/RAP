@@ -1,13 +1,12 @@
 package de.h_da.library.datamanagement.usecase.impl;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import de.h_da.library.SearchException;
 import de.h_da.library.datamanagement.entity.Book;
 import de.h_da.library.datamanagement.entity.Customer;
 import de.h_da.library.datamanagement.manager.BookManager;
@@ -27,8 +26,15 @@ public class SearchImpl implements Search, SearchRemote {
     }
 
 	@Override
-	public List<Book> findBooksByAttributes(Book book) {		
+	public List<Book> findBooksByAttributes(Book book){	
+		if(book == null)
+			throw new SearchException("No book as search filter set!");
+		
 		List<Book> books = bookManager.findAll();
+		
+		if(books.isEmpty()) 
+			throw new SearchException("There are no books stored, search aborted!");
+						
 		List<Book> foundBooks = books;
 		if(book != null) {			
 			if(book.getTitle() != null && book.getAuthors() == null)
@@ -44,8 +50,15 @@ public class SearchImpl implements Search, SearchRemote {
 	}
 
 	@Override
-	public List<Customer> findCustomersByAttributes(Customer customer) {		
+	public List<Customer> findCustomersByAttributes(Customer customer) {
+		if(customer == null)
+			throw new SearchException("No customer as search filter set!");
+		
 		List<Customer> customers = customerManager.findAll();
+		
+		if(customers.isEmpty()) 
+			throw new SearchException("There are no customers stored, search aborted!");
+				
 		List<Customer> foundCustomers = customers;
 		if(customer != null) {			
 			if(customer.getName() != null && customer.getAddress() == null)
