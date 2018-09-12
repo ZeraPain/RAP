@@ -32,7 +32,7 @@ public class AccountingImpl implements Accounting, AccountingRemote {
 		public Long sendInvoice(String invoiceSubject, String invoiceName, String invoiceAddress, int invoiceAmount) {
 			 
 			Date date = new Date();
-			Calendar calendar = Calendar.getInstance();
+			
 			
 		
 			Invoice invoice = new Invoice();
@@ -44,7 +44,12 @@ public class AccountingImpl implements Accounting, AccountingRemote {
 			invoice.setStatus(InvoiceStatus.SENT);
 			
 		
-			return invoice.getId();
+			Invoice invoiceCreated = invoiceManager.create(invoice);
+			if (invoiceCreated == null) {
+				//throw ERROR
+			}
+				
+			return invoiceCreated.getId();
 			
 		}
 
