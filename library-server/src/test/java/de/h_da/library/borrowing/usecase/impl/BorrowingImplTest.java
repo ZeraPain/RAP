@@ -53,7 +53,12 @@ public class BorrowingImplTest extends LibraryTest {
         book.setTitle("Hallo");
         book.setAuthors("Welt");
         
-        bookManagement.addBook(book, 10);
+        try {
+			bookManagement.addBook(book, 10);
+		} catch (LibraryException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         Customer testCustomer = new Customer();
         testCustomer.setName("Tester");
         customerManager.create(testCustomer);
