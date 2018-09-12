@@ -32,6 +32,7 @@ public class Loan implements Serializable {
 	@ManyToOne(cascade={CascadeType.MERGE}, fetch=FetchType.EAGER)
 	private Customer customer;
 	
+	@ManyToOne(cascade={CascadeType.MERGE}, fetch=FetchType.EAGER)
 	private BookOnStock bookOnStock;
 	
 	private LoanStatus status;

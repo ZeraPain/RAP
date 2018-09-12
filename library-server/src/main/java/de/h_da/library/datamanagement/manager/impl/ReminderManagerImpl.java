@@ -31,23 +31,28 @@ public class ReminderManagerImpl implements ReminderManager {
     public ReminderManagerImpl() {
     }
     
+    @Override
     public Reminder create(Reminder reminder) {
         em.persist(reminder);
         return reminder;
     }
 
+    @Override
     public void edit(Reminder reminder) {
         em.merge(reminder);
     }
 
+    @Override
     public void destroy(Reminder reminder) {
         em.remove(em.merge(reminder));
     }
 
+    @Override
     public Reminder findById(Long id) {
         return (Reminder) em.find(Reminder.class, id);
     }
 
+    @Override
     public List<Reminder> findAll() {
         return em.createQuery("select object(o) from Reminder as o").getResultList();
     }

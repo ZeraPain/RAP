@@ -21,23 +21,28 @@ public class LoanManagerImpl implements LoanManager {
     public LoanManagerImpl() {
     }
     
+    @Override
     public Loan create(Loan loan) {
         em.persist(loan);
         return loan;
     }
-
+    
+    @Override
     public void edit(Loan loan) {
         em.merge(loan);
     }
 
+    @Override
     public void destroy(Loan loan) {
         em.remove(em.merge(loan));
     }
-
+    
+    @Override
     public Loan findById(Long loanId) {
         return (Loan) em.find(Loan.class, loanId);
     }
-
+    
+    @Override
     public List<Loan> findAll() {
         return em.createQuery("select object(o) from Loan as o").getResultList();
     }

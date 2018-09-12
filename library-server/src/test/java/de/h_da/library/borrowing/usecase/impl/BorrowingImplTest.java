@@ -70,16 +70,17 @@ public class BorrowingImplTest extends LibraryTest {
 		Customer customer = customers.get(0);
 		Long bookOnStockToBorrowId = bookOnStockToBorrow.getId();
 		Long customerBorrowingId = customer.getId();
-		
-		try {
-			Long loanCreatedId = borrowing.borrowBook(bookOnStockToBorrowId, customerBorrowingId);
-			Loan loanCreated = loanManager.findById(loanCreatedId);
-            assertNotNull(loanCreated);
-            assertEquals(loanCreated.getLoanId(), loanCreatedId);
-			
-		} catch (LibraryException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if (bookOnStockToBorrowId != null && customerBorrowingId != null) {
+			try {
+				Long loanCreatedId = borrowing.borrowBook(bookOnStockToBorrowId, customerBorrowingId);
+				Loan loanCreated = loanManager.findById(loanCreatedId);
+	            assertNotNull(loanCreated);
+	            assertEquals(loanCreated.getLoanId(), loanCreatedId);
+				
+			} catch (LibraryException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 	}

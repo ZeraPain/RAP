@@ -3,10 +3,13 @@ package de.h_da.library.datamanagement.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import de.h_da.library.datamanagement.type.ReminderStatus;
 
@@ -30,6 +33,8 @@ public class Reminder  implements Serializable {
 	private Date dueDate, issueDate ; 
 	private Long fee; 
 	private String invoiceId ;
+	
+	@ManyToOne(cascade={CascadeType.MERGE}, fetch=FetchType.EAGER)
 	private Loan loan; 
 	private ReminderStatus status ;
 	
