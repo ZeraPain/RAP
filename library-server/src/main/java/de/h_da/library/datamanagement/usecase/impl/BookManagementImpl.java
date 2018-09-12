@@ -10,6 +10,7 @@
 package de.h_da.library.datamanagement.usecase.impl;
 
 import de.h_da.library.GlobalInterceptor;
+import de.h_da.library.LibraryException;
 import de.h_da.library.LibraryRuntimeException;
 import de.h_da.library.datamanagement.entity.Book;
 import de.h_da.library.datamanagement.entity.BookOnStock;
@@ -39,28 +40,37 @@ public class BookManagementImpl implements BookManagement, BookManagementRemote 
     }
     
     @Override
-	public int addBook(Book book, int numberOfBooksOnStock)
+	public int addBook(Book book, int numberOfBooksOnStock) throws LibraryException
 	{
     	if (null == book)
     	{
-    		 throw new LibraryRuntimeException("Book must be set");
+    		 throw new LibraryRuntimeException("Book must be set.");
     	}
     	
 		Book newBook = bookManager.create(book);
+		if (null == newBook)
+		{
+			throw new LibraryRuntimeException("Book could not be created.");
+		}
 		long bookId = newBook.getId();
+		if (0 == bookId)
+		{
+			throw new LibraryException("Book could not be created.");
+		}
 		
 		addBooksOnStock((int)bookId, numberOfBooksOnStock);
 		return (int)bookId;
 	}
 
     @Override
-	public void modifyBook(Book book)
+	public void modifyBook(Book book) throws LibraryException
 	{
     	if (null == book)
     	{
     		 throw new LibraryRuntimeException("Book must be set");
     	}
     	
+    	boolean isModified = false;
 		List<Book> books = bookManager.findAll();
 		if(book != null) 
 		{
@@ -71,19 +81,25 @@ public class BookManagementImpl implements BookManagement, BookManagementRemote 
 					b.setTitle(book.getTitle());
 					b.setAuthors(book.getAuthors());
 					bookManager.edit(b);
+					isModified = true;
 				}
 			}							
+		}
+		
+		if (!isModified)
+		{
+			throw new LibraryException("Could not find book.");
 		}
 		
 	}
 	
     @Override
-	public void addBooksOnStock(int bookId, int numberOfBooksOnStock)
+	public void addBooksOnStock(int bookId, int numberOfBooksOnStock) throws LibraryException
 	{
     	Book book = bookManager.findById((long)bookId);
     	if (null == book)
     	{
-    		 throw new LibraryRuntimeException("Could not find book");
+    		 throw new LibraryException("Could not find book");
     	}
     	
 		for (int i = 0; i < numberOfBooksOnStock; ++i)

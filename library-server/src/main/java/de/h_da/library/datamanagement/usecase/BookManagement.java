@@ -2,6 +2,7 @@ package de.h_da.library.datamanagement.usecase;
 
 import javax.ejb.Local;
 
+import de.h_da.library.LibraryException;
 import de.h_da.library.datamanagement.entity.Book;
 
 /**
@@ -32,7 +33,7 @@ public interface BookManagement {
 	 *   	
 	 * </pre>
 	 */
-	public int addBook(Book book, int numberOfBooksOnStock);
+	public int addBook(Book book, int numberOfBooksOnStock) throws LibraryException;
 
 	/**
 	 * [command] Modifies an already stored <code>Book</code> object.
@@ -50,7 +51,7 @@ public interface BookManagement {
 	 * 
 	 * 
 	 */
-	public void modifyBook(Book book);
+	public void modifyBook(Book book) throws LibraryException;
 
 	/**
 	 * [command] Creates new <code>BookOnStock</code> objects for an existing
@@ -70,5 +71,5 @@ public interface BookManagement {
 	 * </pre>
 	 * 
 	 */
-	public void addBooksOnStock(int bookId, int numberOfBooksOnStock);
+	public void addBooksOnStock(int bookId, int numberOfBooksOnStock) throws LibraryException;
 }
