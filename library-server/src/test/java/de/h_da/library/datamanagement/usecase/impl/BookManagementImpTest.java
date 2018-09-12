@@ -8,6 +8,7 @@
 
 package de.h_da.library.datamanagement.usecase.impl;
 
+import de.h_da.library.LibraryException;
 import de.h_da.library.configuration.LibraryTest;
 import de.h_da.library.datamanagement.entity.Book;
 import de.h_da.library.datamanagement.entity.BookOnStock;
@@ -47,7 +48,13 @@ public class BookManagementImpTest extends LibraryTest {
         List<BookOnStock> booksOnStockFoundBefore, booksOnStockFoundAfter;
         booksOnStockFoundBefore = bookOnStockManager.findAll();
         
-        int bookId = bookManagement.addBook(book, 10);
+        int bookId = 0;
+		try {
+			bookId = bookManagement.addBook(book, 10);
+		} catch (LibraryException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         
         booksOnStockFoundAfter = bookOnStockManager.findAll();
         
@@ -61,10 +68,20 @@ public class BookManagementImpTest extends LibraryTest {
         book.setTitle("Hallo");
         book.setAuthors("Welt");
         
-        bookManagement.addBook(book, 1);
+        try {
+			bookManagement.addBook(book, 1);
+		} catch (LibraryException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         
         book.setTitle("Adee");
-        bookManagement.modifyBook(book);
+        try {
+			bookManagement.modifyBook(book);
+		} catch (LibraryException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         
         List<Book> books = bookManager.findAll();
 		if(book != null) 
