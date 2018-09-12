@@ -2,6 +2,8 @@ package de.h_da.library.reminding.usecase;
 
 import javax.ejb.Local;
 
+import de.h_da.library.LibraryException;
+
 
 /**
  * [usecase] This use case comprises all functionality concerned with the
@@ -37,9 +39,10 @@ public interface Reminding {
 	 *         &amp;&amp; l.status == LoanStatus.DELAYED
 	 *    ]      
 	 * </pre>
+	 * @throws LibraryException 
 	 * 
 	 */
-	public void sendReminders();
+	public void sendReminders() throws LibraryException;
 
 	/**
 	 * [command] Closes a reminder, e.g. due to the reception of the reminder

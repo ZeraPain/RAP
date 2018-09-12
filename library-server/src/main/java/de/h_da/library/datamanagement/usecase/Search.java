@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.ejb.Local;
 
+import de.h_da.library.LibraryException;
 import de.h_da.library.datamanagement.entity.Book;
 import de.h_da.library.datamanagement.entity.Customer;
 
@@ -31,9 +32,10 @@ public interface Search {
 	 *     analogous for all other attributes of entity book
 	 *    ]
 	 * </pre>
+	 * @throws LibraryException 
 	 * 
 	 */
-	public List<Book> findBooksByAttributes(Book book);
+	public List<Book> findBooksByAttributes(Book book) throws LibraryException;
 
 	/**
 	 * [basicQuery] Finds all customers in the library system according to a given template.
@@ -50,8 +52,10 @@ public interface Search {
 	 *     analogous for all other attributes of entity book
 	 *    ]
 	 * </pre>
+	 * @throws LibraryException 
 	 * 
 	 */
-	public List<Customer> findCustomersByAttributes(Customer customer);
+	public List<Customer> findCustomersByAttributes(Customer customer) throws LibraryException;
+	
 
 }

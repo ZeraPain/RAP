@@ -9,7 +9,7 @@ import javax.interceptor.Interceptors;
 
 import de.h_da.library.borrowing.usecase.Borrowing;
 import de.h_da.library.borrowing.usecase.BorrowingRemote;
-import de.h_da.library.BorrowingException;
+
 import de.h_da.library.GlobalInterceptor;
 import de.h_da.library.LibraryException;
 import de.h_da.library.LibraryRuntimeException;
@@ -118,8 +118,8 @@ public class BorrowingImpl implements Borrowing, BorrowingRemote{
 		}
 		if (loanEdited.getStatus() != LoanStatus.RETURNED) {
 			try {
-				throw new BorrowingException("Loan status unequals returned");
-			} catch (BorrowingException e) {
+				throw new LibraryException("Loan status unequals returned");
+			} catch (LibraryException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
