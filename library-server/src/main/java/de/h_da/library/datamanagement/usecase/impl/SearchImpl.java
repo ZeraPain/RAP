@@ -1,9 +1,12 @@
 package de.h_da.library.datamanagement.usecase.impl;
 
-import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import de.h_da.library.SearchException;
 import de.h_da.library.datamanagement.entity.Book;
 import de.h_da.library.datamanagement.entity.Customer;
 import de.h_da.library.datamanagement.manager.BookManager;
@@ -23,28 +26,49 @@ public class SearchImpl implements Search, SearchRemote {
     }
 
 	@Override
-	public Collection<Book> findBooksByAttributes(Book book) {		
-		Collection<Book> books = bookManager.findAll();
-		if(book != null) {
-			//remove all books that are not matching the title or the author
-			if(!book.getTitle().isEmpty())
-				books.removeIf(b->!b.getTitle().isEmpty() && b.getTitle().toUpperCase() != book.getTitle().toUpperCase());
-			if(!book.getAuthors().isEmpty())
-				books.removeIf(b->!b.getAuthors().isEmpty() && b.getAuthors().toUpperCase() != book.getAuthors().toUpperCase());							
+	public List<Book> findBooksByAttributes(Book book){	
+		if(book == null)
+			throw new SearchException("No book as search filter set!");
+		
+		List<Book> books = bookManager.findAll();
+		
+		if(books.isEmpty()) 
+			throw new SearchException("There are no books stored, search aborted!");
+						
+		List<Book> foundBooks = books;
+		if(book != null) {			
+			if(book.getTitle() != null && book.getAuthors() == null)
+				foundBooks = books.stream().filter(b->b.getTitle()!=null && !b.getTitle().isEmpty() && b.getTitle().toUpperCase().equals(book.getTitle().toUpperCase())).collect(Collectors.toList());
+			else if(book.getTitle() == null && book.getAuthors() != null)
+				foundBooks = books.stream().filter(b->b.getAuthors()!=null && !b.getAuthors().isEmpty() && b.getAuthors().toUpperCase().equals(book.getAuthors().toUpperCase())).collect(Collectors.toList());
+			else if(book.getTitle() != null && book.getAuthors() != null)
+				foundBooks = books.stream().filter(b->b.getTitle() != null && b.getAuthors() != null && !b.getTitle().isEmpty() && b.getTitle().toUpperCase().equals(book.getTitle().toUpperCase()) 
+				&& !b.getAuthors().isEmpty() && b.getAuthors().toUpperCase().equals(book.getAuthors().toUpperCase())).collect(Collectors.toList());
+			
 		}
-		return books;
+		return foundBooks;
 	}
 
 	@Override
-	public Collection<Customer> findCustomersByAttributes(Customer customer) {
-		Collection<Customer> customers = customerManager.findAll();
-		if(customer != null) {
-			//remove all customers that are not matching the name or the address
-			if(!customer.getName().isEmpty())
-				customers.removeIf(c->!c.getName().isEmpty() && c.getName().toUpperCase() != customer.getName().toUpperCase());
-			if(!customer.getAddress().isEmpty())
-				customers.removeIf(c->!c.getAddress().isEmpty() && c.getAddress().toUpperCase() != customer.getAddress().toUpperCase());							
+	public List<Customer> findCustomersByAttributes(Customer customer) {
+		if(customer == null)
+			throw new SearchException("No customer as search filter set!");
+		
+		List<Customer> customers = customerManager.findAll();
+		
+		if(customers.isEmpty()) 
+			throw new SearchException("There are no customers stored, search aborted!");
+				
+		List<Customer> foundCustomers = customers;
+		if(customer != null) {			
+			if(customer.getName() != null && customer.getAddress() == null)
+				foundCustomers = customers.stream().filter(c->!c.getName().isEmpty() && c.getName().toUpperCase().equals(customer.getName().toUpperCase())).collect(Collectors.toList());
+			else if(customer.getName() == null && customer.getAddress() != null)
+				foundCustomers = customers.stream().filter(c->!c.getAddress().isEmpty() && c.getAddress().toUpperCase().equals(customer.getAddress().toUpperCase())).collect(Collectors.toList());
+			else if(customer.getName() != null && customer.getAddress() != null)
+				foundCustomers = customers.stream().filter(c->!c.getName().isEmpty() && c.getName().toUpperCase().equals(customer.getName().toUpperCase()) 
+				&& !c.getAddress().isEmpty() && c.getAddress().toUpperCase().equals(customer.getAddress().toUpperCase())).collect(Collectors.toList());
 		}
-		return customers;
+		return foundCustomers;
 	}
 }

@@ -4,10 +4,15 @@ import java.util.Date;
 import java.util.Calendar;
 
 import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.interceptor.Interceptors;
 
 import de.h_da.library.borrowing.usecase.Borrowing;
 import de.h_da.library.borrowing.usecase.BorrowingRemote;
+import de.h_da.library.borrowing.usecase.interceptor.BorrowingInterceptor;
+import de.h_da.library.BorrowingException;
 import de.h_da.library.LibraryException;
+import de.h_da.library.LibraryRuntimeException;
 import de.h_da.library.datamanagement.entity.BookOnStock;
 import de.h_da.library.datamanagement.entity.Loan;
 import de.h_da.library.datamanagement.entity.Customer;
@@ -17,6 +22,8 @@ import de.h_da.library.datamanagement.manager.LoanManager;
 
 import de.h_da.library.datamanagement.type.LoanStatus;
 
+@Stateless
+@Interceptors(BorrowingInterceptor.class)
 public class BorrowingImpl implements Borrowing, BorrowingRemote{
 	@EJB
 	BookOnStockManager bookOnStockManager;
@@ -55,14 +62,14 @@ public class BorrowingImpl implements Borrowing, BorrowingRemote{
 	 * @throws LibraryException 
 	 */
 	@Override
-	public Long borrowBook(Long bookOnStockId, Long customerId) {		
+	public Long borrowBook(Long bookOnStockId, Long customerId) throws LibraryException {		
 		Customer customer = customerManager.findById(customerId);
 		if(customer == null) {
-			//throw LibraryException();
+			throw new LibraryException("Could not find customer");
 		}
 		BookOnStock bookOnStock = bookOnStockManager.findById(bookOnStockId);
 		if(bookOnStock == null) {
-			//throw LibraryException();
+			throw new LibraryException("Could not find Book on stock");
 		}
 		Date loanDate = new Date();
 		Calendar calendar = Calendar.getInstance();
@@ -77,7 +84,7 @@ public class BorrowingImpl implements Borrowing, BorrowingRemote{
 		
 		Loan loanCreated = loanManager.create(loan);
 		if (loanCreated == null) {
-			//throw LibraryException();
+			throw new LibraryException("Could not create loan");
 		}
 		return loanCreated.getLoanId();
 	}
@@ -99,7 +106,7 @@ public class BorrowingImpl implements Borrowing, BorrowingRemote{
 	public void returnBook(Long loanId) {
 		Loan loan = loanManager.findById(loanId);
 		if (loan == null) {
-			//throw ERROR
+			throw new LibraryRuntimeException("Could not find loan");
 		}
 		loan.setStatus(LoanStatus.RETURNED);
 		
@@ -107,10 +114,15 @@ public class BorrowingImpl implements Borrowing, BorrowingRemote{
 		
 		Loan loanEdited = loanManager.findById(loanId);
 		if (loanEdited == null) {
-			//throw ERROR
+			throw new LibraryRuntimeException("Could not find loan");
 		}
 		if (loanEdited.getStatus() != LoanStatus.RETURNED) {
-			//throw ERROR
+			try {
+				throw new BorrowingException("Loan status unequals returned");
+			} catch (BorrowingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 

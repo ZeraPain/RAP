@@ -2,6 +2,7 @@ package de.h_da.library.registration.usecase;
 
 import javax.ejb.Remote;
 
+import de.h_da.library.RegistrationException;
 import de.h_da.library.datamanagement.entity.Customer;
 
 @Remote
@@ -28,7 +29,7 @@ public interface RegistrationRemote {
 	 *        ]
 	 * </pre>
 	 */
-	public int register(Customer customer);
+	public Long register(Customer customer) throws RegistrationException;
 
 	/**
 	 * Modifies the data of an already registered customer
@@ -44,5 +45,5 @@ public interface RegistrationRemote {
 	 * </pre>
 	 * 
 	 */
-	public void modifyRestistration(Customer customer);
+	public void modifyRestistration(Customer customer) throws RegistrationException;
 }
