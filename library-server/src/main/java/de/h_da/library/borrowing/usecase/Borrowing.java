@@ -50,7 +50,8 @@ public interface Borrowing {
 	 *    post l.status == LoanStatus.RETURNED
 	 *   ]
 	 * </pre>
+	 * @throws LibraryException 
 	 */
-	public void returnBook(Long loanId);
+	public void returnBook(Long loanId) throws LibraryException;
 
 }

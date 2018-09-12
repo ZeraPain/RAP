@@ -44,7 +44,7 @@ public class BookManagementImpl implements BookManagement, BookManagementRemote 
 	{
     	if (null == book)
     	{
-    		 throw new LibraryRuntimeException("Book must be set.");
+    		 throw new LibraryException("Book must be set.");
     	}
     	
 		Book newBook = bookManager.create(book);
@@ -67,7 +67,7 @@ public class BookManagementImpl implements BookManagement, BookManagementRemote 
 	{
     	if (null == book)
     	{
-    		 throw new LibraryRuntimeException("Book must be set");
+    		 throw new LibraryException("Book must be set");
     	}
     	
     	boolean isModified = false;
