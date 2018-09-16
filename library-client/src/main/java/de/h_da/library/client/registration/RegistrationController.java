@@ -6,7 +6,10 @@ import de.h_da.library.client.ServerFacade;
 import de.h_da.library.component1.type.DataType1;
 import de.h_da.library.component1.usecase.UseCase1Remote;
 import de.h_da.library.datamanagement.entity.Customer;
+import de.h_da.library.datamanagement.manager.CustomerManager;
+import de.h_da.library.datamanagement.usecase.CustomerManagementRemote;
 import de.h_da.library.registration.usecase.RegistrationRemote;
+import javafx.animation.FadeTransition;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -14,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Duration;
 
 public class RegistrationController implements QuasarController{
 
@@ -57,8 +61,56 @@ public class RegistrationController implements QuasarController{
     private Label idModifyLabel;
 
     @FXML
+    private Label infoModify;
+    
+    @FXML
+    private Label infoRegister;
+    
+    RegistrationRemote registration;
+    
+    CustomerManagementRemote customerMan;
+    
+    
+    
+    
+    private FadeTransition fadeOutTransition = new FadeTransition(
+    	    Duration.millis(3000)
+    	);
+
+	private void fadeOut(Label node, String text) {
+	    fadeOutTransition.setNode(node);
+
+	    fadeOutTransition.setFromValue(1.0);
+	    fadeOutTransition.setToValue(0.0);
+	    fadeOutTransition.setCycleCount(1);
+	    fadeOutTransition.setAutoReverse(false);
+	    
+		node.setText(text);
+	    infoRegister.setVisible(true);
+	    fadeOutTransition.playFromStart();
+	}
+	
+    @FXML
     void modifyEvent(MouseEvent event) {
     	System.out.println("modify");
+    	/*
+    	Customer customer = new Customer();
+    	try {
+    		int id = Integer.valueOf(idModifyTextBox.getText()).intValue();
+    		customer = customerMan.findCustomerById(id);
+    	} catch (NumberFormatException e) {
+    		this.fadeOut(infoModify, "ID Value not a Number");
+    	}
+        customer.setAddress(addressModifyTextBox.getText());
+        customer.setName(nameModifyTextBox.getText());
+        this.fadeOut(infoModify, "Modified successfully");
+        try {
+			registration.modifyRestistration(customer);
+		} catch (RegistrationException e) {
+			// TODO Auto-generated catch block
+			this.fadeOut(infoModify, e.getMessage());
+		}
+		*/
     }
 
     @FXML
@@ -70,16 +122,16 @@ public class RegistrationController implements QuasarController{
         try {
 			Long id = registration.register(customer);
 			System.out.println("Customer ID " + id.toString());
+			this.fadeOut(infoRegister, "Stored with Customer ID: " + id.toString());
 		} catch (RegistrationException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			this.fadeOut(infoRegister, e.getMessage());
+
 		}
-        
-        
-    	
     }
     
-    RegistrationRemote registration;
+    
+    
 
 	@Override
 	public void init() {
