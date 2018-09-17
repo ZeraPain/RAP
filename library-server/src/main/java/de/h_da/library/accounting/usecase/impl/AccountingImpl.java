@@ -1,27 +1,22 @@
 package de.h_da.library.accounting.usecase.impl;
 
 
-import java.util.Collection;
-import java.util.Calendar;
 import java.util.Date;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-
-import com.sun.mail.imap.protocol.Status;
+import javax.interceptor.Interceptors;
 
 import de.h_da.library.accounting.manager.InvoiceManager;
 import de.h_da.library.accounting.usecase.Accounting;
 import de.h_da.library.accounting.usecase.AccountingRemote;
-import de.h_da.library.datamanagement.entity.Loan;
-import de.h_da.library.reminding.usecase.Reminding;
+import de.h_da.library.GlobalInterceptor;
 import de.h_da.library.accounting.entity.Invoice;
-import de.h_da.library.accounting.manager.InvoiceManager;
 import de.h_da.library.accounting.type.InvoiceStatus;
 
 
-
-
+@Stateless
+@Interceptors(GlobalInterceptor.class)
 public class AccountingImpl implements Accounting, AccountingRemote {
 
 	@EJB
