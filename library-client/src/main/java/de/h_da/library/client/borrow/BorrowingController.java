@@ -95,7 +95,16 @@ public class BorrowingController implements QuasarController{
 
     @FXML
     void returnBookAction(MouseEvent event) {
-
+    		try {
+				borrowing.returnBook(Long.valueOf(loanIDTextField.getText()).longValue());
+				this.fadeOut(infoReturnBook, "Successful");
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				this.fadeOut(infoLabel, "ID Value not a Number");
+			} catch (LibraryException e) {
+				// TODO Auto-generated catch block
+				this.fadeOut(infoLabel, e.getMessage());
+			}
     }
 
 	@Override

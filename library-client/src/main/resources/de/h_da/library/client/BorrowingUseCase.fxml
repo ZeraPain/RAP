@@ -19,7 +19,7 @@
                   <TextField fx:id="bookOnStockIDField" layoutX="129.0" layoutY="80.0" />
                   <Button fx:id="bookAvailableButton" layoutX="317.0" layoutY="33.0" mnemonicParsing="false" onMouseClicked="#bookAvailableButtonAction" text="Book available?" />
                   <Button fx:id="borrowButton" layoutX="317.0" layoutY="114.0" mnemonicParsing="false" onMouseClicked="#borrowButtonAction" text="Borrow" />
-                  <Label fx:id="infoLabel" layoutX="24.0" layoutY="132.0" />
+                  <Label fx:id="infoLabel" layoutX="18.0" layoutY="141.0" prefHeight="29.0" prefWidth="242.0" />
                   <TextField fx:id="customerIDTextField" layoutX="129.0" layoutY="114.0" />
                   <Label layoutX="15.0" layoutY="119.0" text="Customer ID" />
                </children>
@@ -33,7 +33,7 @@
                   <Label layoutX="14.0" layoutY="48.0" text="Loan ID" />
                   <TextField fx:id="loanIDTextField" layoutX="128.0" layoutY="44.0" />
                   <Button fx:id="returnBookButton" layoutX="317.0" layoutY="43.0" mnemonicParsing="false" onMouseClicked="#returnBookAction" text="Return Book" />
-                  <Label fx:id="infoReturnBook" layoutX="14.0" layoutY="109.0" />
+                  <Label fx:id="infoReturnBook" layoutX="14.0" layoutY="109.0" prefHeight="16.0" prefWidth="170.0" />
                </children>
             </AnchorPane>
         </content>
