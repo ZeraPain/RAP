@@ -2,6 +2,7 @@ package de.h_da.library.registration.usecase;
 
 import javax.ejb.Remote;
 
+import de.h_da.library.LibraryException;
 import de.h_da.library.RegistrationException;
 import de.h_da.library.datamanagement.entity.Customer;
 
@@ -46,4 +47,6 @@ public interface RegistrationRemote {
 	 * 
 	 */
 	public void modifyRestistration(Customer customer) throws RegistrationException;
+	
+	public Customer findCustomerById(Long id) throws LibraryException;
 }

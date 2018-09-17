@@ -2,6 +2,7 @@ package de.h_da.library.registration.usecase;
 
 import javax.ejb.Local;
 
+import de.h_da.library.LibraryException;
 import de.h_da.library.RegistrationException;
 import de.h_da.library.datamanagement.entity.Customer;
 
@@ -53,6 +54,8 @@ public interface Registration {
 	 * 
 	 */
 	public void modifyRestistration(Customer customer) throws RegistrationException;
+	
+	public Customer findCustomerById(Long id) throws LibraryException;
 
 
 }

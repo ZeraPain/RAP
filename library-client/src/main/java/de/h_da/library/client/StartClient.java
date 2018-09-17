@@ -43,6 +43,7 @@ public class StartClient extends Application {
                 dialogCore.loadView("Registration", "/de/h_da/library/client/RegistrationUseCase.fxml");
                 dialogCore.loadView("Reminder", "/de/h_da/library/client/ReminderUseCase.fxml");
                 dialogCore.loadView("Search", "/de/h_da/library/client/SearchUseCase.fxml"); 
+                dialogCore.loadView("BookManagement", "/de/h_da/library/client/BookManagementUseCase.fxml");
         	}else if ( role == customerOption) {
                 dialogCore.loadView("Search", "/de/h_da/library/client/SearchUseCase.fxml"); 
         	}else if ( role == accountantOption) {

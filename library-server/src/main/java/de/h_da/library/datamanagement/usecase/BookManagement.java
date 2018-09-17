@@ -51,7 +51,7 @@ public interface BookManagement {
 	 * 
 	 * 
 	 */
-	public void modifyBook(Book book) throws LibraryException;
+	public void modifyBook(Long id, Book book) throws LibraryException;
 
 	/**
 	 * [command] Creates new <code>BookOnStock</code> objects for an existing

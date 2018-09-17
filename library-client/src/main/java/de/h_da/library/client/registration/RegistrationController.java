@@ -1,5 +1,6 @@
 package de.h_da.library.client.registration;
 
+import de.h_da.library.LibraryException;
 import de.h_da.library.RegistrationException;
 import de.h_da.library.client.QuasarController;
 import de.h_da.library.client.ServerFacade;
@@ -68,7 +69,6 @@ public class RegistrationController implements QuasarController{
     
     RegistrationRemote registration;
     
-    CustomerManagementRemote customerMan;
     
     
     
@@ -93,24 +93,25 @@ public class RegistrationController implements QuasarController{
     @FXML
     void modifyEvent(MouseEvent event) {
     	System.out.println("modify");
-    	/*
+    	
     	Customer customer = new Customer();
     	try {
-    		int id = Integer.valueOf(idModifyTextBox.getText()).intValue();
-    		customer = customerMan.findCustomerById(id);
-    	} catch (NumberFormatException e) {
-    		this.fadeOut(infoModify, "ID Value not a Number");
-    	}
-        customer.setAddress(addressModifyTextBox.getText());
-        customer.setName(nameModifyTextBox.getText());
-        this.fadeOut(infoModify, "Modified successfully");
-        try {
+    		long id = Long.valueOf(idModifyTextBox.getText()).longValue();
+    		customer = registration.findCustomerById(id);
+            
+            customer.setAddress(addressModifyTextBox.getText());
+            customer.setName(nameModifyTextBox.getText());
 			registration.modifyRestistration(customer);
+			this.fadeOut(infoModify, "Modified successfully");
 		} catch (RegistrationException e) {
 			// TODO Auto-generated catch block
 			this.fadeOut(infoModify, e.getMessage());
-		}
-		*/
+    	} catch (NumberFormatException e) {
+    		this.fadeOut(infoModify, "ID Value not a Number");
+    	} catch (LibraryException e) {
+			// TODO Auto-generated catch block
+    		this.fadeOut(infoModify, e.getMessage());
+		}		
     }
 
     @FXML
@@ -136,10 +137,6 @@ public class RegistrationController implements QuasarController{
 	@Override
 	public void init() {
         registration = ServerFacade.getInstance().lookup("RegistrationImpl", RegistrationRemote.class);
-        //entity1List.addAll(reigstration.useCaseMethod1());
-        //entity1ListView.setItems(entity1List);
-
-        //attribute2Combo.setItems(FXCollections.observableArrayList(DataType1.values()));
 		
 	}
 
