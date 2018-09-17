@@ -137,10 +137,6 @@ public class RegistrationController implements QuasarController{
 	@Override
 	public void init() {
         registration = ServerFacade.getInstance().lookup("RegistrationImpl", RegistrationRemote.class);
-        //entity1List.addAll(reigstration.useCaseMethod1());
-        //entity1ListView.setItems(entity1List);
-
-        //attribute2Combo.setItems(FXCollections.observableArrayList(DataType1.values()));
 		
 	}
 

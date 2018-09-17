@@ -30,8 +30,7 @@ public class RegistrationImpl implements Registration, RegistrationRemote{
 	}
 	
 	@Override
-	public Long register(Customer customer) throws RegistrationException {
-		
+	public Long register(Customer customer) throws RegistrationException {		
 		List<Customer> customerCollection =  customerManager.findAll();
 		Customer foundCustomer = customerCollection.stream().filter(c -> c.getId().equals(customer.getId())).findFirst().orElse(new Customer());
 		if(foundCustomer.getId() == null) {
@@ -60,6 +59,13 @@ public class RegistrationImpl implements Registration, RegistrationRemote{
 	}
 	
 	private void customerExists(Customer customer, List<Customer> customerCollection) throws RegistrationException {
+		
+		if (customer.getAddress().equals("")) {
+			throw new RegistrationException("Address need to be filled");
+		}
+		if (customer.getName().equals("")) {
+			throw new RegistrationException("Name need to be filled");
+		}
 		for (Customer c : customerCollection) {
 
 			if(c.getAddress().equals(customer.getAddress())) {
@@ -69,6 +75,10 @@ public class RegistrationImpl implements Registration, RegistrationRemote{
 				throw new RegistrationException("Customer Name already exists");
 			}
 		}
+	}
+	
+	private void customerNotNull(Customer customer) {
+		
 	}
 	
 	@Override
@@ -84,13 +94,9 @@ public class RegistrationImpl implements Registration, RegistrationRemote{
 	
 	@Override
 	public void modifyRestistration(Customer customer) throws RegistrationException {
-		Customer storedCustomer = customerManager.findById(customer.getId());
-		try {
-			customerExists(this.findCustomerById(customer.getId()), customerManager.findAll());
-		} catch (LibraryException e) {
-			// TODO Auto-generated catch block
-		}
-		customerManager.edit(storedCustomer);
+		customerExists(customer, customerManager.findAll());
+		customerManager.edit(customer);
+		
 	}
 
 
