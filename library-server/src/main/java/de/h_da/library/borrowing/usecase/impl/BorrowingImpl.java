@@ -1,6 +1,7 @@
 package de.h_da.library.borrowing.usecase.impl;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Calendar;
 
 import javax.ejb.EJB;
@@ -13,6 +14,7 @@ import de.h_da.library.borrowing.usecase.BorrowingRemote;
 import de.h_da.library.GlobalInterceptor;
 import de.h_da.library.LibraryException;
 import de.h_da.library.LibraryRuntimeException;
+import de.h_da.library.datamanagement.entity.Book;
 import de.h_da.library.datamanagement.entity.BookOnStock;
 import de.h_da.library.datamanagement.entity.Loan;
 import de.h_da.library.datamanagement.entity.Customer;
@@ -61,6 +63,17 @@ public class BorrowingImpl implements Borrowing, BorrowingRemote{
 	 * </pre>
 	 * @throws LibraryException 
 	 */
+	
+	public Long bookAvailable(Long bookID) throws LibraryException {
+		List<BookOnStock> stock = bookOnStockManager.findAll();
+		BookOnStock available = stock.stream().filter(b -> b.getBook().getId() == bookID).findFirst().orElse(new BookOnStock());
+		if (available.getId() == null) {
+			throw new LibraryException("Book not in stock");
+		}
+		return available.getId();
+	}
+	
+	
 	@Override
 	public Long borrowBook(Long bookOnStockId, Long customerId) throws LibraryException {		
 		Customer customer = customerManager.findById(customerId);

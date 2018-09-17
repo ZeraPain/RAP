@@ -63,8 +63,13 @@ public class BookManagementImpl implements BookManagement, BookManagementRemote 
 	}
 
     @Override
-	public void modifyBook(Book book) throws LibraryException
+	public void modifyBook(Long id, Book book) throws LibraryException
 	{
+    	if (id <= 0)
+    	{
+    		 throw new LibraryException("Invalid book id");
+    	}
+    	
     	if (null == book)
     	{
     		 throw new LibraryException("Book must be set");
@@ -76,7 +81,7 @@ public class BookManagementImpl implements BookManagement, BookManagementRemote 
 		{
 			for (Book b : books)
 			{
-				if (b.getId() == book.getId())
+				if (b.getId() == id)
 				{
 					b.setTitle(book.getTitle());
 					b.setAuthors(book.getAuthors());

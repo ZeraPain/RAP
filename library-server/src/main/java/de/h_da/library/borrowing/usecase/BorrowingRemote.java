@@ -3,6 +3,8 @@ package de.h_da.library.borrowing.usecase;
 import javax.ejb.Remote;
 
 import de.h_da.library.LibraryException;
+import de.h_da.library.datamanagement.entity.Book;
+import de.h_da.library.datamanagement.entity.BookOnStock;
 
 @Remote
 public interface BorrowingRemote {
@@ -47,5 +49,7 @@ public interface BorrowingRemote {
 	 * @throws LibraryException 
 	 */
 	public void returnBook(Long loanId) throws LibraryException;
+	
+	public Long bookAvailable(Long bookID) throws LibraryException;
 
 }
