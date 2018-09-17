@@ -22,59 +22,80 @@ import javafx.util.Duration;
 
 public class BookManagementController implements QuasarController {
 
-    @FXML
-    private AnchorPane addBookPane;
+	  @FXML
+	    private AnchorPane addBookPane;
 
-    @FXML
-    private TextField authorsBookTextBox;
+	    @FXML
+	    private TextField authorsBookTextBox;
 
-    @FXML
-    private TextField titleBookTextBox;
+	    @FXML
+	    private TextField titleBookTextBox;
 
-    @FXML
-    private Label authorsBookLabel;
+	    @FXML
+	    private Label authorsBookLabel;
 
-    @FXML
-    private Label titleBookLabel;
+	    @FXML
+	    private Label titleBookLabel;
 
-    @FXML
-    private Button addbookButton;
+	    @FXML
+	    private Button addbookButton;
 
-    @FXML
-    private TextField stockBookTextBox;
+	    @FXML
+	    private TextField stockBookTextBox;
 
-    @FXML
-    private Label stockBookLabel;
-    
-    @FXML
-    private Label infoBookLabel;
-    
-    @FXML
-    private AnchorPane modifyBookPane;
+	    @FXML
+	    private Label stockBookLabel;
 
-    @FXML
-    private TextField authorsBookModifyTextBox;
+	    @FXML
+	    private Label infoBookLabel;
 
-    @FXML
-    private TextField idBookModifyTextBox;
+	    @FXML
+	    private AnchorPane modifyBookPane;
 
-    @FXML
-    private Label authorsBookModifyLabel;
+	    @FXML
+	    private TextField authorsBookModifyTextBox;
 
-    @FXML
-    private Label titleBookModifyLabel;
+	    @FXML
+	    private TextField idBookModifyTextBox;
 
-    @FXML
-    private Button modifyBookButton;
+	    @FXML
+	    private Label authorsBookModifyLabel;
 
-    @FXML
-    private TextField titleBookModifyTextBox;
+	    @FXML
+	    private Label titleBookModifyLabel;
 
-    @FXML
-    private Label idBookModifyLabel;
+	    @FXML
+	    private Button modifyBookButton;
 
-    @FXML
-    private Label infoBookModifyLabel;
+	    @FXML
+	    private TextField titleBookModifyTextBox;
+
+	    @FXML
+	    private Label idBookModifyLabel;
+
+	    @FXML
+	    private Label infoBookModifyLabel;
+
+	    @FXML
+	    private AnchorPane modifyBookPane1;
+
+	    @FXML
+	    private TextField idBookModifyTextBox1;
+
+	    @FXML
+	    private TextField stockBookTextBox1;
+	    
+	    @FXML
+	    private Button modifyBookButton1;
+
+	    @FXML
+	    private Label idBookModifyLabel1;
+
+	    @FXML
+	    private Label infoBookModifyLabel1;
+
+	    @FXML
+	    private Label idBookModifyLabel11;
     
     BookManagementRemote bookManagement;
     SearchRemote search;
@@ -144,6 +165,26 @@ public class BookManagementController implements QuasarController {
 		}
     }
 
+    @FXML
+    void modifyBookStockEvent(MouseEvent event) {
+    	System.out.println("modify stock");
+    	
+    	try {
+    		int id = Integer.valueOf(idBookModifyTextBox1.getText());
+    		int numberOfBooksOnStock = Integer.valueOf(stockBookTextBox1.getText());
+    		bookManagement.addBooksOnStock(id, numberOfBooksOnStock);
+			this.fadeOut(infoBookModifyLabel1, "Modified successfully");
+    	} catch (NumberFormatException e) {
+    		System.out.println(e.getMessage());
+    		this.fadeOut(infoBookModifyLabel1, "ID Value not a Number");
+    	} catch (LibraryException e) {
+			// TODO Auto-generated catch block
+    		System.out.println(e.getMessage());
+    		this.fadeOut(infoBookModifyLabel1, e.getMessage());
+		}
+    }
+
+    
 	@Override
 	public void init() {
         bookManagement = ServerFacade.getInstance().lookup("BookManagementImpl", BookManagementRemote.class);
