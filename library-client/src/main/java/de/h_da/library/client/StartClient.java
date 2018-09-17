@@ -27,6 +27,7 @@ public class StartClient extends Application {
             dialogCore.loadView("Use case 1", "/de/h_da/library/client/UseCase1.fxml");
             dialogCore.loadView("Registration", "/de/h_da/library/client/RegistrationUseCase.fxml");
             dialogCore.loadView("Reminder", "/de/h_da/library/client/ReminderUseCase.fxml");
+            dialogCore.loadView("Search", "/de/h_da/library/client/SearchUseCase.fxml");
         }catch (Exception e){
             throw new RuntimeException(e);
         }

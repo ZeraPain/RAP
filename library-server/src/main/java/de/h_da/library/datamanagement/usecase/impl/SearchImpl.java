@@ -35,18 +35,18 @@ public class SearchImpl implements Search, SearchRemote {
 		
 		List<Book> books = bookManager.findAll();
 		
-		if(books.isEmpty()) 
+		if(books == null || books.isEmpty()) 
 			throw new LibraryException("There are no books stored, search aborted!");
 						
 		List<Book> foundBooks = books;
 		if(book != null) {			
 			if(book.getTitle() != null && book.getAuthors() == null)
-				foundBooks = books.stream().filter(b->b.getTitle()!=null && !b.getTitle().isEmpty() && b.getTitle().toUpperCase().equals(book.getTitle().toUpperCase())).collect(Collectors.toList());
+				foundBooks = books.stream().filter(b->b.getTitle()!=null && !b.getTitle().isEmpty() && b.getTitle().toUpperCase().contains(book.getTitle().toUpperCase())).collect(Collectors.toList());
 			else if(book.getTitle() == null && book.getAuthors() != null)
-				foundBooks = books.stream().filter(b->b.getAuthors()!=null && !b.getAuthors().isEmpty() && b.getAuthors().toUpperCase().equals(book.getAuthors().toUpperCase())).collect(Collectors.toList());
+				foundBooks = books.stream().filter(b->b.getAuthors()!=null && !b.getAuthors().isEmpty() && b.getAuthors().toUpperCase().contains(book.getAuthors().toUpperCase())).collect(Collectors.toList());
 			else if(book.getTitle() != null && book.getAuthors() != null)
-				foundBooks = books.stream().filter(b->b.getTitle() != null && b.getAuthors() != null && !b.getTitle().isEmpty() && b.getTitle().toUpperCase().equals(book.getTitle().toUpperCase()) 
-				&& !b.getAuthors().isEmpty() && b.getAuthors().toUpperCase().equals(book.getAuthors().toUpperCase())).collect(Collectors.toList());
+				foundBooks = books.stream().filter(b->b.getTitle() != null && b.getAuthors() != null && !b.getTitle().isEmpty() && b.getTitle().toUpperCase().contains(book.getTitle().toUpperCase()) 
+				&& !b.getAuthors().isEmpty() && b.getAuthors().toUpperCase().contains(book.getAuthors().toUpperCase())).collect(Collectors.toList());
 			
 		}
 		return foundBooks;
@@ -59,18 +59,18 @@ public class SearchImpl implements Search, SearchRemote {
 		
 		List<Customer> customers = customerManager.findAll();
 		
-		if(customers.isEmpty()) 
+		if(customers == null || customers.isEmpty()) 
 			throw new LibraryException("There are no customers stored, search aborted!");
 				
 		List<Customer> foundCustomers = customers;
 		if(customer != null) {			
 			if(customer.getName() != null && customer.getAddress() == null)
-				foundCustomers = customers.stream().filter(c->!c.getName().isEmpty() && c.getName().toUpperCase().equals(customer.getName().toUpperCase())).collect(Collectors.toList());
+				foundCustomers = customers.stream().filter(c->!c.getName().isEmpty() && c.getName().toUpperCase().contains(customer.getName().toUpperCase())).collect(Collectors.toList());
 			else if(customer.getName() == null && customer.getAddress() != null)
-				foundCustomers = customers.stream().filter(c->!c.getAddress().isEmpty() && c.getAddress().toUpperCase().equals(customer.getAddress().toUpperCase())).collect(Collectors.toList());
+				foundCustomers = customers.stream().filter(c->!c.getAddress().isEmpty() && c.getAddress().toUpperCase().contains(customer.getAddress().toUpperCase())).collect(Collectors.toList());
 			else if(customer.getName() != null && customer.getAddress() != null)
-				foundCustomers = customers.stream().filter(c->!c.getName().isEmpty() && c.getName().toUpperCase().equals(customer.getName().toUpperCase()) 
-				&& !c.getAddress().isEmpty() && c.getAddress().toUpperCase().equals(customer.getAddress().toUpperCase())).collect(Collectors.toList());
+				foundCustomers = customers.stream().filter(c->!c.getName().isEmpty() && c.getName().toUpperCase().contains(customer.getName().toUpperCase()) 
+				&& !c.getAddress().isEmpty() && c.getAddress().toUpperCase().contains(customer.getAddress().toUpperCase())).collect(Collectors.toList());
 		}
 		return foundCustomers;
 	}
