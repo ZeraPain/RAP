@@ -86,7 +86,7 @@ public class RegistrationController implements QuasarController{
 	    fadeOutTransition.setAutoReverse(false);
 	    
 		node.setText(text);
-	    infoRegister.setVisible(true);
+	    node.setVisible(true);
 	    fadeOutTransition.playFromStart();
 	}
 	
