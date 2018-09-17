@@ -35,7 +35,7 @@ public class SearchImpl implements Search, SearchRemote {
 		
 		List<Book> books = bookManager.findAll();
 		
-		if(books.isEmpty()) 
+		if(books == null || books.isEmpty()) 
 			throw new LibraryException("There are no books stored, search aborted!");
 						
 		List<Book> foundBooks = books;
@@ -59,7 +59,7 @@ public class SearchImpl implements Search, SearchRemote {
 		
 		List<Customer> customers = customerManager.findAll();
 		
-		if(customers.isEmpty()) 
+		if(customers == null || customers.isEmpty()) 
 			throw new LibraryException("There are no customers stored, search aborted!");
 				
 		List<Customer> foundCustomers = customers;

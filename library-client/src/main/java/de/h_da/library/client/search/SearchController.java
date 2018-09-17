@@ -95,6 +95,7 @@ public class SearchController implements QuasarController{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			this.fadeOut(searchBookInfoLabel, e.getMessage());
+			return;
 		}
     	
     	if(foundBooks == null || foundBooks.isEmpty()) {
@@ -135,6 +136,7 @@ public class SearchController implements QuasarController{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			this.fadeOut(searchCustomerInfoLabel, e.getMessage());
+			return;
 		}
     	
     	if(foundCustomers == null || foundCustomers.isEmpty()) {
