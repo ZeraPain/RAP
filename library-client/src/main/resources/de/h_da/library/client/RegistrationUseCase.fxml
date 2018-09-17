@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.181" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.h_da.library.client.registration.RegistrationController">
    <children>
       <TitledPane animated="false" text="register user">
@@ -19,6 +18,7 @@
                   <Label fx:id="nameRegisterLabel" layoutX="14.0" layoutY="19.0" text="Name" />
                   <Label fx:id="addressRegisterLabel" layoutX="14.0" layoutY="53.0" text="Address" />
                   <Button fx:id="registerButton" layoutX="10.0" layoutY="87.0" mnemonicParsing="false" onMouseClicked="#registerEvent" text="Register" />
+                  <Label fx:id="infoRegister" layoutX="105.0" layoutY="92.0" />
                </children>
             </AnchorPane>
         </content>
@@ -34,6 +34,7 @@
                   <Button layoutX="16.0" layoutY="146.0" mnemonicParsing="false" onMouseClicked="#modifyEvent" text="Modify" />
                   <TextField fx:id="addressModifyTextBox" layoutX="85.0" layoutY="102.0" />
                   <Label fx:id="idModifyLabel" layoutX="23.0" layoutY="34.0" text="ID" />
+                  <Label fx:id="infoModify" layoutX="85.0" layoutY="151.0" />
                </children>
             </AnchorPane>
         </content>

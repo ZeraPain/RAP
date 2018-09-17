@@ -2,6 +2,8 @@ package de.h_da.library.reminding.usecase;
 
 import javax.ejb.Remote;
 
+import de.h_da.library.LibraryException;
+
 
 /**
  * [usecase] This use case comprises all functionality concerned with the
@@ -39,7 +41,7 @@ public interface RemindingRemote {
 	 * </pre>
 	 * 
 	 */
-	public void sendReminders();
+	public void sendReminders() throws LibraryException;
 
 	/**
 	 * [command] Closes a reminder, e.g. due to the reception of the reminder
@@ -55,6 +57,6 @@ public interface RemindingRemote {
 	 *     ]
 	 * </pre>
 	 */
-	public void closeReminder(Long invoiceId);
+	public void closeReminder(Long invoiceId)  throws LibraryException;
 	
 }
