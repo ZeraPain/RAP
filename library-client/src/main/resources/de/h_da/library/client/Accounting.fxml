@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#sendInvoiceHeandler" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.181" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.h_da.library.client.accounting.AccountingController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.181" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.h_da.library.client.accounting.AccountingController">
    <children>
       <TitledPane animated="false" text="Invoice">
         <content>
@@ -17,7 +17,7 @@
                   <Label fx:id="invoiceName" layoutX="26.0" layoutY="28.0" text="invoiceName" />
                   <Label fx:id="setAmount" layoutX="26.0" layoutY="64.0" text="setAmount" />
                   <Label fx:id="setSubject" layoutX="26.0" layoutY="108.0" text="setSubject" />
-                  <Button fx:id="sendButton" layoutX="195.0" layoutY="255.0" mnemonicParsing="false" text="sendInvoice" />
+                  <Button fx:id="sendButton" layoutX="195.0" layoutY="255.0" mnemonicParsing="false" text="sendInvoice" onMouseClicked="#sendInvoiceHeandler"/>
                   <Label fx:id="setAdress" layoutX="25.0" layoutY="162.0" text="setAddress" />
                   <Label fx:id="setDate" layoutX="25.0" layoutY="202.0" text="setDate" />
                   <TextField fx:id="setAmountTextfeld" layoutX="128.0" layoutY="67.0" />
