@@ -77,7 +77,7 @@ public class BookManagementImpTest extends LibraryTest {
         
         book.setTitle("Adee");
         try {
-			bookManagement.modifyBook(book);
+			bookManagement.modifyBook(book.getId(), book);
 		} catch (LibraryException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

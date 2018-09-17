@@ -11,13 +11,16 @@
    <children>
       <TitledPane animated="false" text="Create a new book">
         <content>
-          <AnchorPane fx:id="addBookPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+          <AnchorPane fx:id="addBookPane" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
                <children>
                   <TextField fx:id="authorsBookTextBox" layoutX="76.0" layoutY="14.0" />
-                  <TextField fx:id="titleBookTextBox" layoutX="76.0" layoutY="49.0" />
+                  <TextField fx:id="titleBookTextBox" layoutX="76.0" layoutY="48.0" />
                   <Label fx:id="authorsBookLabel" layoutX="14.0" layoutY="19.0" text="Authors" />
                   <Label fx:id="titleBookLabel" layoutX="14.0" layoutY="53.0" text="Title" />
-                  <Button fx:id="addbookButton" layoutX="10.0" layoutY="87.0" mnemonicParsing="false" onMouseClicked="#addBookEvent" text="add Book" />
+                  <Button fx:id="addbookButton" layoutX="4.0" layoutY="116.0" mnemonicParsing="false" onMouseClicked="#addBookEvent" text="add Book" />
+                  <TextField fx:id="stockBookTextBox" layoutX="76.0" layoutY="81.0" />
+                  <Label fx:id="stockBookLabel" layoutX="12.0" layoutY="84.0" text="Stock" />
+                  <Label fx:id="infoBookLabel" layoutX="99.0" layoutY="121.0" />
                </children>
             </AnchorPane>
         </content>
@@ -33,6 +36,7 @@
                   <Button fx:id="modifyBookButton" layoutX="16.0" layoutY="146.0" mnemonicParsing="false" onMouseClicked="#modifyBookEvent" text="Modify" />
                   <TextField fx:id="titleBookModifyTextBox" layoutX="85.0" layoutY="102.0" />
                   <Label fx:id="idBookModifyLabel" layoutX="23.0" layoutY="34.0" text="ID" />
+                  <Label fx:id="infoBookModifyLabel" layoutX="92.0" layoutY="151.0" />
                </children>
             </AnchorPane>
         </content>
