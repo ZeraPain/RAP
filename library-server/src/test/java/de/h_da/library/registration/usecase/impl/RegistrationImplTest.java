@@ -1,4 +1,4 @@
-package de.h_da.library.accounting.usecase.impl;
+package de.h_da.library.registration.usecase.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -11,6 +11,7 @@ import org.jboss.arquillian.junit.Arquillian;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import de.h_da.library.LibraryException;
 import de.h_da.library.RegistrationException;
 import de.h_da.library.accounting.entity.Invoice;
 import de.h_da.library.accounting.manager.InvoiceManager;
@@ -172,6 +173,36 @@ public class RegistrationImplTest extends LibraryTest {
         //execution
         customerCreated = customerManager.findById(id);
         id = registration.register(customerCreated);
+	}
+	
+	@Test
+	public void findCustomer() throws LibraryException {
+        Customer customer, customerCreated;
+
+        // preparation
+        customer = new Customer();
+        customer.setName("Mod5Customer");
+        customer.setAddress("Mod5CustomerAddress");
+        
+        Long id = registration.register(customer);
+
+        //execution
+        customerCreated = registration.findCustomerById(id);
+        assertEquals(customerCreated.getId(), customer.getId());
+	}
+	@Test(expected=LibraryException.class)
+	public void findCustomerException() throws LibraryException{
+        Customer customer, customerCreated;
+
+        // preparation
+        customer = new Customer();
+        customer.setName("Mod6Customer");
+        customer.setAddress("Mod6CustomerAddress");
+        
+        Long id = registration.register(customer);
+
+        //execution
+        customerCreated = registration.findCustomerById(Long.valueOf("4346564").longValue());
 	}
 	
 

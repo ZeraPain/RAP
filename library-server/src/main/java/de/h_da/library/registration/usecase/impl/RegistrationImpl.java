@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+
+import de.h_da.library.LibraryException;
 import de.h_da.library.RegistrationException;
 import de.h_da.library.accounting.entity.Invoice;
 import de.h_da.library.accounting.manager.InvoiceManager;
@@ -68,14 +70,28 @@ public class RegistrationImpl implements Registration, RegistrationRemote{
 			}
 		}
 	}
-
+	
+	@Override
+	public Customer findCustomerById(Long id) throws LibraryException {
+		// TODO Auto-generated method stub
+		List<Customer> customerCollection =  customerManager.findAll();
+		Customer customerFound = customerCollection.stream().filter(c -> c.getId().equals(id)).findFirst().orElse(new Customer());
+		if (customerFound.getId() == null) {
+			throw new LibraryException("No Customer with the ID " + id.toString() + " found");
+		}
+		return customerFound;
+	}
+	
 	@Override
 	public void modifyRestistration(Customer customer) throws RegistrationException {
 		Customer storedCustomer = customerManager.findById(customer.getId());
-		if(storedCustomer.getId() != customer.getId()) {
-			throw new RegistrationException("Customer ID" + customer.getId().toString() + " does not exist");
+		try {
+			customerExists(this.findCustomerById(customer.getId()), customerManager.findAll());
+		} catch (LibraryException e) {
+			// TODO Auto-generated catch block
 		}
 		customerManager.edit(storedCustomer);
 	}
+
 
 }
