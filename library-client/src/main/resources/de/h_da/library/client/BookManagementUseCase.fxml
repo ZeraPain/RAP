@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.h_da.library.client.bookmanagement.BookManagementController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="635.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.h_da.library.client.bookmanagement.BookManagementController">
    <children>
       <TitledPane animated="false" text="Create a new book">
         <content>
@@ -17,7 +17,7 @@
                   <TextField fx:id="titleBookTextBox" layoutX="76.0" layoutY="48.0" />
                   <Label fx:id="authorsBookLabel" layoutX="14.0" layoutY="19.0" text="Authors" />
                   <Label fx:id="titleBookLabel" layoutX="14.0" layoutY="53.0" text="Title" />
-                  <Button fx:id="addbookButton" layoutX="4.0" layoutY="116.0" mnemonicParsing="false" onMouseClicked="#addBookEvent" text="add Book" />
+                  <Button fx:id="addbookButton" layoutX="7.0" layoutY="115.0" mnemonicParsing="false" onMouseClicked="#addBookEvent" text="add Book" />
                   <TextField fx:id="stockBookTextBox" layoutX="76.0" layoutY="81.0" />
                   <Label fx:id="stockBookLabel" layoutX="12.0" layoutY="84.0" text="Stock" />
                   <Label fx:id="infoBookLabel" layoutX="99.0" layoutY="121.0" />
@@ -25,7 +25,7 @@
             </AnchorPane>
         </content>
       </TitledPane>
-      <TitledPane animated="false" prefHeight="268.0" prefWidth="600.0" text="Modify Book">
+      <TitledPane animated="false" prefHeight="255.0" prefWidth="596.0" text="Modify Book Content">
         <content>
           <AnchorPane fx:id="modifyBookPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
@@ -40,6 +40,20 @@
                </children>
             </AnchorPane>
         </content>
+      </TitledPane>
+      <TitledPane animated="false" prefHeight="255.0" prefWidth="596.0" text="Modify Books on stock">
+         <content>
+            <AnchorPane fx:id="modifyBookPane1" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TextField fx:id="idBookModifyTextBox1" layoutX="85.0" layoutY="27.0" />
+                  <Button fx:id="modifyBookButton1" layoutX="14.0" layoutY="111.0" mnemonicParsing="false" onMouseClicked="#modifyBookStockEvent" text="Modify" />
+                  <Label fx:id="idBookModifyLabel1" layoutX="23.0" layoutY="34.0" text="ID" />
+                  <Label fx:id="infoBookModifyLabel1" layoutX="92.0" layoutY="151.0" />
+                  <TextField fx:id="stockBookTextBox1" layoutX="85.0" layoutY="61.0" />
+                  <Label fx:id="idBookModifyLabel11" layoutX="23.0" layoutY="68.0" text="Stock" />
+               </children>
+            </AnchorPane>
+         </content>
       </TitledPane>
    </children>
 </VBox>
