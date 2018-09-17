@@ -1,6 +1,5 @@
 package de.h_da.library.client.borrow;
 
-import java.awt.event.MouseEvent;
 
 import de.h_da.library.LibraryException;
 import de.h_da.library.borrowing.usecase.BorrowingRemote;
@@ -11,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 
 public class BorrowingController implements QuasarController{
@@ -64,7 +64,7 @@ public class BorrowingController implements QuasarController{
 	
 
     @FXML
-    void bookAvailableButton(MouseEvent event) {
+    void bookAvailableButtonAction(MouseEvent event) {
     	try {
 			Long bookOnStockID = borrowing.bookAvailable(Long.valueOf(bookIDTextField.getText()).longValue());
 			bookOnStockIDField.setText(bookOnStockID.toString());
